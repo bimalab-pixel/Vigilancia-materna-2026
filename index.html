@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -886,6 +886,41 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+
+@media print {
+    /* Desactivar scrolls y alturas fijas que causan el corte */
+    * {
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+        position: static !important;
+    }
+
+    /* Ocultar elementos que no deben imprimirse */
+    header, footer, button, .btn-pro, .btn-guardar, form, .control-panel, #install-banner, .nav-header {
+        display: none !important;
+    }
+
+    /* Evitar que las notas se rompan a mitad de hoja */
+    .nota-item, .nota-caja {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        display: block !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Forzar que el texto largo se ajuste al ancho de la hoja */
+    p, span, .nota-txt {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Mantener colores de fondo al guardar como PDF */
+    .ficha-header, .header-emb, .header-puerp {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -1569,100 +1604,7 @@ function importarDatos(event) {
     reader.readAsText(file);
 }
 
-    // --- FUNCION MEJORADA: RESPETA AUTORÍA Y ASEGURA FORMATO ---
-function descargarPDF(index, tipo) {
-    const data = getPacientePorIndex(index, tipo);
-    const paciente = data.paciente;
-
-    // Identificar el elemento a imprimir
-    let elementId = '';
-    if (tipo === 'embarazada') elementId = `vista-info-emb-${index}`;
-    else if (tipo === 'puerpera') elementId = `vista-info-puerp-${index}`;
-    else if (tipo === 'archivada') elementId = `vista-info-arch-${index}`;
-
-    const element = document.getElementById(elementId);
-    if (!element) { alert("Error: No se encuentra la vista."); return; }
-
-    // --- MEJORA: BUSCAR AL AUTOR ORIGINAL DEL REGISTRO ---
-    // Usamos el campo 'registrado_por' guardado en la ficha. 
-    // Si no existe (registros muy antiguos), ponemos un texto genérico.
-    const autorOriginal = paciente.registrado_por || "PERSONAL DE SALUD";
-
-    const nombreArchivo = `Ficha_${tipo}_${paciente.nombre.replace(/ /g, '_')}.pdf`;
-    
-    // Configuración optimizada para evitar saltos de línea bruscos
-    const opt = {
-        margin:       [0.5, 0.5, 0.5, 0.5],
-        filename:     nombreArchivo,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { 
-            scale: 2, 
-            useCORS: true, 
-            scrollY: 0,
-            letterRendering: true 
-        },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
-    };
-
-    // 2. Clonar y limpiar
-    const clone = element.cloneNode(true);
-    const elementosNoDeseados = clone.querySelectorAll('button, .detalle-actions, form, textarea');
-    elementosNoDeseados.forEach(el => el.remove());
-
-    // Expandir listas de notas para que salgan todas
-    const listasNotas = clone.querySelectorAll('ul');
-    listasNotas.forEach(lista => {
-        lista.style.maxHeight = 'none';
-        lista.style.overflow = 'visible';
-    });
-
-    // --- HEADER MEJORADO CON AUTORÍA REAL ---
-    const header = document.createElement('div');
-    header.innerHTML = `
-        <div style="text-align: center; margin-bottom: 20px; border-bottom: 2px solid #00796b; padding-bottom: 10px; font-family: sans-serif;">
-            <h2 style="color:#00796b; margin: 0; font-size: 1.6rem;">Ficha Clínica - Vigilancia Materna</h2>
-            <p style="color:#555; margin: 5px 0 0 0; font-size: 1rem;">Salud Comunitaria Coatepeque</p>
-            <div style="margin-top: 10px; padding: 10px; background-color: #f5f5f5; border-radius: 5px;">
-                <p style="margin: 0; font-size: 0.95rem; color: #333;">
-                    <b>REGISTRO ORIGINAL POR:</b> <span style="color: #00796b; text-transform: uppercase;">${autorOriginal}</span>
-                </p>
-            </div>
-            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">
-                Estado: ${tipo.toUpperCase()} | Impreso el: ${new Date().toLocaleDateString()} a las ${new Date().toLocaleTimeString()}
-            </p>
-        </div>
-    `;
-    clone.insertBefore(header, clone.firstChild);
-
-    // Contenedor temporal oculto
-    const contenedorTemporal = document.createElement('div');
-    contenedorTemporal.style.position = 'absolute';
-    contenedorTemporal.style.left = '-9999px';
-    contenedorTemporal.style.top = '0';
-    contenedorTemporal.style.width = '750px'; // Ancho fijo para consistencia en PDF
-    contenedorTemporal.style.backgroundColor = 'white';
-    contenedorTemporal.style.padding = '20px';
-    contenedorTemporal.appendChild(clone);
-    document.body.appendChild(contenedorTemporal);
-
-    // Generar PDF
-    html2pdf().set(opt).from(clone).toPdf().output('datauristring').then(function (pdfAsString) {
-        const base64 = pdfAsString.split(',')[1];
-
-        if (typeof Android !== "undefined" && Android.guardarPDF) {
-            Android.guardarPDF(base64, nombreArchivo);
-        } else {
-            html2pdf().set(opt).from(clone).save();
-        }
-        document.body.removeChild(contenedorTemporal);
-    }).catch(err => {
-        console.error("Error PDF:", err);
-        if(document.body.contains(contenedorTemporal)) document.body.removeChild(contenedorTemporal);
-        alert("❌ Error al generar el PDF.");
-    });
-}
-
+   
     // --- FUNCIONES DE UTILIDAD para FUS ---
 
     function toggleFurFusFields(metodo) {
@@ -3886,6 +3828,122 @@ function filtrarNombres(inputElement) {
     }
 }
 
+function descargarPDF(index, tipo) {
+    const data = getPacientePorIndex(index, tipo);
+    const paciente = data.paciente;
+    if (!paciente) return;
+
+    const autorOriginal = paciente.registrado_por || "PERSONAL DE SALUD";
+    const nombreArchivo = `Ficha_${paciente.nombre.replace(/ /g, '_')}`;
+
+    const iframe = document.createElement('iframe');
+    Object.assign(iframe.style, {
+        position: 'fixed', right: '0', bottom: '0', width: '0', height: '0', border: 'none', visibility: 'hidden'
+    });
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write('<html><head><title>' + nombreArchivo + '</title>');
+    
+    doc.write(`
+        <style>
+            body { font-family: sans-serif; padding: 30px; color: #333; line-height: 1.4; }
+            .header { text-align: center; border-bottom: 3px solid #00796b; padding-bottom: 10px; margin-bottom: 20px; }
+            .section-title { background: #e0f2f1; color: #00796b; padding: 5px 10px; margin-top: 20px; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; }
+            .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+            .dato { margin-bottom: 8px; font-size: 0.95rem; }
+            .label { color: #777; font-size: 0.75rem; display: block; font-weight: bold; }
+            .historial-box { background: #f3e5f5; border: 1px solid #ce93d8; padding: 10px; border-radius: 5px; margin-top: 10px; }
+            .nota-box { border-left: 4px solid #00796b; background: #f9f9f9; padding: 10px; margin-bottom: 15px; page-break-inside: avoid; }
+            .nota-fecha { color: #00796b; font-weight: bold; font-size: 0.85rem; }
+            .nota-texto { white-space: pre-wrap; word-wrap: break-word; font-size: 0.95rem; }
+            @media print { * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; } }
+        </style>
+    `);
+    doc.write('</head><body>');
+
+    // CÁLCULO DE EDAD
+    let edadActual = paciente.fecha_nacimiento ? calcularEdad(crearFechaLocal(paciente.fecha_nacimiento)) + " años" : "N/A";
+
+    // ENCABEZADO E INFORMACIÓN BÁSICA
+    let htmlContent = `
+        <div class="header">
+            <h2 style="margin:0;">Ficha de Vigilancia Materna</h2>
+            <p style="margin:5px 0; color:#666;">Salud Comunitaria Coatepeque</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="dato"><span class="label">PACIENTE</span><strong>${paciente.nombre}</strong></div>
+            <div class="dato"><span class="label">EDAD ACTUAL</span>${edadActual}</div>
+            <div class="dato"><span class="label">DIRECCIÓN</span>${paciente.direccion || 'No especificada'}</div>
+            <div class="dato"><span class="label">RECURSO RESPONSABLE</span>${autorOriginal}</div>
+        </div>
+
+        <div class="section-title">Datos del Estado Actual (${tipo.toUpperCase()})</div>
+        <div class="info-grid" style="margin-top:10px;">
+            <div class="dato"><span class="label">${paciente.fp ? 'FECHA DE PARTO (FP)' : 'FECHA ÚLTIMA REGLA (FUR)'}</span>
+                ${paciente.fp || paciente.fur || 'N/A'}
+            </div>
+            ${paciente.fp ? `<div class="dato"><span class="label">ESTADO</span>Puérpera</div>` : ''}
+        </div>
+    `;
+
+    // LÓGICA DEL HISTORIAL (Si es Puérpera y tiene historial guardado)
+    if (paciente.historial_embarazo) {
+        const h = paciente.historial_embarazo;
+        const vac = h.vacunas || {};
+        const checkV = (date) => date ? `Sí (${date})` : `No registrada`;
+
+        htmlContent += `
+            <div class="historial-box">
+                <strong style="color:#673ab7; display:block; margin-bottom:5px;">📜 Historial de Embarazo Anterior</strong>
+                <div class="info-grid" style="font-size:0.85rem;">
+                    <div><span class="label">FUR ANTERIOR</span>${h.fur || 'N/A'}</div>
+                    <div><span class="label">MÉTODO</span>${h.metodo || 'FUR'}</div>
+                </div>
+                <div style="font-size:0.8rem; margin-top:5px; border-top:1px solid #d1c4e9; padding-top:5px;">
+                    <strong>Vacunas en embarazo:</strong><br>
+                    Influenza: ${checkV(vac.influenza)} | DTPa: ${checkV(vac.dtpa)} | DT: ${checkV(vac.dtadulto)} | VRS: ${checkV(vac.vrs)}
+                </div>
+            </div>
+        `;
+    }
+
+    // NOTAS CLÍNICAS
+    htmlContent += `<div class="section-title">Notas Clínicas (${paciente.notas ? paciente.notas.length : 0})</div>`;
+
+    if (paciente.notas && paciente.notas.length > 0) {
+        // Ordenar notas por fecha (opcional, aquí las pongo como están en el objeto)
+        paciente.notas.forEach(nota => {
+            htmlContent += `
+                <div class="nota-box">
+                    <div class="nota-fecha">${nota.fecha} ${nota.etapa ? '['+nota.etapa+']' : ''}</div>
+                    <div class="nota-texto">${nota.texto}</div>
+                </div>
+            `;
+        });
+    } else {
+        htmlContent += '<p>No hay notas registradas.</p>';
+    }
+
+    doc.write(htmlContent);
+    doc.write('</body></html>');
+    doc.close();
+
+    setTimeout(() => {
+        try {
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+        } catch (e) {
+            alert("Error al procesar impresión");
+        } finally {
+            setTimeout(() => {
+                if(document.body.contains(iframe)) document.body.removeChild(iframe);
+            }, 2000);
+        }
+    }, 500);
+}
 
 </script>
 </body>
