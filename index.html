@@ -1256,6 +1256,9 @@
 <section id="seccion-reporte-interno" class="section">
     <div class="header-registro">
         <button class="btn-back" onclick="mostrarSeccion('inicio')">⬅ Volver</button>
+        <button onclick="imprimirReporteGeneral()" style="background:#00796b; color:white; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold; float:right;">
+            🖨️ Imprimir Reporte
+        </button>
         <h2>Reporte Detallado General</h2>
     </div>
 
@@ -3944,6 +3947,146 @@ function descargarPDF(index, tipo) {
         }
     }, 500);
 }
+
+function imprimirReporteGeneral() {
+    // 1. Filtrar SOLO pacientes activas (Embarazadas y Puérperas)
+    // Se excluyen las archivadas para limpiar el reporte
+    const activas = [
+        ...embarazadas.map(p => ({...p, tipo: 'EMB'})),
+        ...puerperas.map(p => ({...p, tipo: 'PUE'}))
+    ];
+
+    if (activas.length === 0) {
+        alert("No hay pacientes activas (Embarazadas o Puérperas) para generar el reporte.");
+        return;
+    }
+
+    // 2. Crear Iframe temporal para aislamiento total de la impresión
+    const iframe = document.createElement('iframe');
+    Object.assign(iframe.style, {
+        position: 'fixed', right: '0', bottom: '0', width: '0', height: '0', border: 'none'
+    });
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write('<html><head><title>Reporte de Vigilancia Activa</title>');
+    
+    // CSS de alta precisión: Elimina espacios arriba y optimiza para horizontal
+    doc.write(`
+        <style>
+            @page { 
+                size: letter landscape; 
+                margin: 5mm; /* Margen mínimo para que empiece en el borde superior */
+            }
+            body { 
+                font-family: Arial, sans-serif; 
+                margin: 0; 
+                padding: 0; 
+                background: white !important;
+                color: #000;
+            }
+            .header-reporte { 
+                text-align: center; 
+                border-bottom: 2px solid #000; 
+                margin-bottom: 10px; 
+                padding-bottom: 5px;
+            }
+            table { 
+                width: 100%; 
+                border-collapse: collapse; 
+                font-size: 10px; 
+            }
+            th { 
+                background-color: #f2f2f2 !important; 
+                border: 1px solid #000; 
+                padding: 5px; 
+                text-align: left;
+                -webkit-print-color-adjust: exact;
+            }
+            td { 
+                border: 1px solid #000; 
+                padding: 5px; 
+                vertical-align: middle; 
+            }
+            .tag { 
+                font-weight: bold; 
+                font-size: 8px; 
+                padding: 2px 5px; 
+                border-radius: 3px; 
+                color: white !important; 
+            }
+            .tag-emb { background: #673ab7 !important; -webkit-print-color-adjust: exact; }
+            .tag-pue { background: #e91e63 !important; -webkit-print-color-adjust: exact; }
+        </style>
+    `);
+    doc.write('</head><body>');
+
+    // 3. Encabezado del Reporte (Directo al grano)
+    const ahora = new Date();
+    doc.write(`
+        <div class="header-reporte">
+            <h2 style="margin:0; font-size: 15px;">REPORTE DE VIGILANCIA MATERNA (CASOS ACTIVOS)</h2>
+            <p style="margin:2px 0; font-size: 10px;">
+                Coatepeque | Generado: ${ahora.toLocaleDateString()} ${ahora.toLocaleTimeString()} | Total: ${activas.length}
+            </p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 40px; text-align: center;">TIPO</th>
+                    <th>NOMBRE COMPLETO</th>
+                    <th style="width: 60px; text-align: center;">EDAD</th>
+                    <th>DIRECCIÓN / COMUNIDAD</th>
+                    <th style="width: 90px; text-align: center;">FUR / PARTO</th>
+                    <th style="width: 90px; text-align: center;">FPP</th>
+                    <th>RESPONSABLE</th>
+                </tr>
+            </thead>
+            <tbody>
+    `);
+
+    // 4. Llenar la tabla con los datos filtrados
+    activas.forEach(p => {
+        let edad = p.fecha_nacimiento ? calcularEdad(crearFechaLocal(p.fecha_nacimiento)) + " años" : "-";
+        
+        let fpp = "-";
+        if(p.tipo === 'EMB' && p.fur) {
+            try { 
+                const fppDate = new Date(crearFechaLocal(p.fur));
+                fppDate.setDate(fppDate.getDate() + 280);
+                fpp = fppDate.toLocaleDateString();
+            } catch(e) { fpp = "Err"; }
+        }
+
+        const claseTag = p.tipo === 'EMB' ? 'tag-emb' : 'tag-pue';
+
+        doc.write(`
+            <tr>
+                <td style="text-align:center;"><span class="tag ${claseTag}">${p.tipo}</span></td>
+                <td><strong>${p.nombre}</strong></td>
+                <td style="text-align:center;">${edad}</td>
+                <td>${p.direccion || '-'}</td>
+                <td style="text-align:center;">${p.fur || p.fp || '-'}</td>
+                <td style="text-align:center;">${fpp}</td>
+                <td style="font-size: 8px;">${p.registrado_por || '-'}</td>
+            </tr>
+        `);
+    });
+
+    doc.write('</tbody></table></body></html>');
+    doc.close();
+
+    // 5. Lanzar impresión
+    setTimeout(() => {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+        setTimeout(() => { 
+            if(document.body.contains(iframe)) document.body.removeChild(iframe); 
+        }, 2000);
+    }, 600);
+}
+
 
 </script>
 </body>
