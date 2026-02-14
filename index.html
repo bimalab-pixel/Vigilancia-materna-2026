@@ -925,6 +925,32 @@
 </head>
 <body>
 
+<script>
+    (function() {
+        // Carga inmediata del nombre guardado
+        const nombreLocal = localStorage.getItem('MI_NOMBRE_RECURSO');
+        
+        // Función para pintar el nombre sin depender de nada más
+        window.actualizarDisplayUsuario = function() {
+            const etiqueta = document.getElementById('display-nombre-recurso');
+            if (etiqueta) {
+                let nombre = localStorage.getItem('MI_NOMBRE_RECURSO');
+                if (!nombre || nombre === "SIN_NOMBRE" || nombre === "" || nombre === "null") {
+                    nombre = "PERSONAL DE SALUD";
+                }
+                etiqueta.innerText = nombre;
+            }
+        };
+
+        // Ejecutar de inmediato si el elemento ya existe o esperar al DOM
+        if (document.getElementById('display-nombre-recurso')) {
+            window.actualizarDisplayUsuario();
+        } else {
+            document.addEventListener('DOMContentLoaded', window.actualizarDisplayUsuario);
+        }
+    })();
+</script>
+
 <header>
     <h1>👩‍⚕️ Vigilancia Materna</h1>
     <p>Salud Comunitaria Coatepeque</p>
@@ -3506,32 +3532,6 @@ function generarReporteGlobal() {
             alert("❌ Error: " + error.message);
         }
     }, 500);
-}
-
-
-// ==========================================
-// BARRA DE USUARIO (VERSIÓN INSTANTÁNEA)
-// ==========================================
-
-function actualizarDisplayUsuario() {
-    try {
-        const etiqueta = document.getElementById('display-nombre-recurso');
-        if (!etiqueta) return; // Si no existe el elemento, no hacemos nada
-
-        let nombre = localStorage.getItem('MI_NOMBRE_RECURSO');
-
-        // Si el nombre está vacío o es un error, ponemos uno genérico
-        if (!nombre || nombre === "SIN_NOMBRE" || nombre === "" || nombre === "null") {
-            nombre = "PERSONAL DE SALUD";
-        }
-
-        etiqueta.innerText = nombre;
-    } catch (error) {
-        console.error("Error crítico al cargar nombre, continuando inicio...", error);
-        // Si falla, nos aseguramos de que el texto no diga "Cargando..."
-        const etiquetaError = document.getElementById('display-nombre-recurso');
-        if(etiquetaError) etiquetaError.innerText = "USUARIO";
-    }
 }
 
 
