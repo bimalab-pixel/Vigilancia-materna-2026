@@ -1074,6 +1074,29 @@
             align-items: center;
         }
 
+        /* --- ROSA DE LOS VIENTOS --- */
+        .leaflet-rosa-vientos {
+            width: 64px;
+            height: 64px;
+            background: transparent;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.28);
+            pointer-events: none;
+            margin-bottom: 6px;
+            margin-left: 6px;
+        }
+        .leaflet-rosa-vientos svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        /* En pantalla completa, subir la rosa por encima de la barra de filtros */
+        #mapa-zona-leaflet-wrapper:-webkit-full-screen .leaflet-bottom.leaflet-left,
+        #mapa-zona-leaflet-wrapper:fullscreen .leaflet-bottom.leaflet-left,
+        #mapa-zona-leaflet-wrapper[data-simulated-fs] .leaflet-bottom.leaflet-left {
+            bottom: 62px !important;
+        }
+
         /* Mini mapa para ubicación manual */
         #mini-mapa-emb, #mini-mapa-puerp {
             width: 100%;
@@ -1238,7 +1261,7 @@
 
 <header>
     <div style="width:100%;display:flex;justify-content:flex-start;padding:6px 10px 0;">
-        <a href="calculadora.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);color:#fff;text-decoration:none;font-size:.82rem;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);color:#fff;text-decoration:none;font-size:.82rem;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">
             ← Menú Principal
         </a>
     </div>
@@ -1969,7 +1992,9 @@ function obtenerFechaLocalISO() {
 }
 
     function crearFechaLocal(dateString) {
-        const parts = dateString.split('-');
+        if (!dateString) return new Date();
+        const parts = String(dateString).split('-');
+        if (parts.length < 3) return new Date();
         // Asume formato 'YYYY-MM-DD'
         return new Date(parts[0], parts[1] - 1, parts[2]);
     }
@@ -2819,8 +2844,8 @@ function importarDatos(event) {
                 const vac = h.vacunas || {};
 
                 // CALCULO DE SEMANAS AL NACER
-                const furEfectiva = getEffectiveFURDate(h); // Usamos la misma función que para embarazadas pero pasamos el historial
-                const semanasAlNacer = calcularEdadGestacionalAlParto(furEfectiva, fpDate);
+                const furEfectiva = (h.fur || h.fus_date) ? getEffectiveFURDate(h) : null;
+                const semanasAlNacer = furEfectiva ? calcularEdadGestacionalAlParto(furEfectiva, fpDate) : 'No calculable';
 
                 const checkV = (date) => date ? `<span class="status-ok">Sí (${formatDate(crearFechaLocal(date))})</span>` : `<span class="status-pending">No</span>`;
 
@@ -3087,8 +3112,8 @@ function importarDatos(event) {
             if (p.historial_embarazo) {
                 const h = p.historial_embarazo;
                 const vac = h.vacunas || {};
-                const furEfectiva = getEffectiveFURDate(h);
-                const semanasAlNacer = calcularEdadGestacionalAlParto(furEfectiva, fpDate);
+                const furEfectiva = (h.fur || h.fus_date) ? getEffectiveFURDate(h) : null;
+                const semanasAlNacer = furEfectiva ? calcularEdadGestacionalAlParto(furEfectiva, fpDate) : 'No calculable';
                 const checkV = (date) => date ? `<span class="status-ok">Sí (${formatDate(crearFechaLocal(date))})</span>` : `<span class="status-pending">No</span>`;
 
                 historialHTML = `
@@ -3404,15 +3429,6 @@ function importarDatos(event) {
     const nuevoTipoRiesgo = (nuevoRiesgo === 'si' && document.getElementById(`edit-tipo-riesgo-${tipo}`)) ? document.getElementById(`edit-tipo-riesgo-${tipo}`).value.trim() : '';
 
     if (nuevoNombre && nuevaFechaPrincipal) {
-        // Leer ubicación capturada en el formulario de edición (si el usuario usó GPS/Manual)
-        const prefix = tipo === 'embarazada' ? 'emb' : 'puerp';
-        const latEl = document.getElementById(`lat-${prefix}`);
-        const lngEl = document.getElementById(`lng-${prefix}`);
-        const origenEl = document.getElementById(`origen-ubic-${prefix}`);
-        const nuevaLat = (latEl && latEl.value) ? parseFloat(latEl.value) : null;
-        const nuevaLng = (lngEl && lngEl.value) ? parseFloat(lngEl.value) : null;
-        const nuevaOrigen = (origenEl && origenEl.value) ? origenEl.value : '';
-
         if (tipo === 'embarazada') {
                 const nuevaInfluenza = document.getElementById('edit-influenza-embarazada').value;
                 const nuevaDTPa = document.getElementById('edit-dtpa-embarazada').value;
@@ -3439,13 +3455,6 @@ function importarDatos(event) {
                 };
                 embarazadas[index].metodo = embarazadas[index].metodo || 'FUR';
 
-                // Actualizar ubicación solo si se capturó una nueva en este formulario
-                if (nuevaLat && nuevaLng) {
-                    embarazadas[index].lat = nuevaLat;
-                    embarazadas[index].lng = nuevaLng;
-                    embarazadas[index].origen_ubic = nuevaOrigen;
-                }
-
                 guardarDatos('embarazadas');
             } else if (tipo === 'puerpera') {
             puerperas[index].nombre = nuevoNombre;
@@ -3459,13 +3468,6 @@ function importarDatos(event) {
             puerperas[index].fecha_nacimiento = nuevaFechaNacimiento;
             puerperas[index].direccion = nuevaDireccion;
             puerperas[index].fp = nuevaFechaPrincipal;
-
-            // Actualizar ubicación solo si se capturó una nueva en este formulario
-            if (nuevaLat && nuevaLng) {
-                puerperas[index].lat = nuevaLat;
-                puerperas[index].lng = nuevaLng;
-                puerperas[index].origen_ubic = nuevaOrigen;
-            }
 
             guardarDatos('puerperas');
         }
@@ -5009,7 +5011,7 @@ let _mapaZona = null;           // Instancia del mapa principal
 let _mapaFiltroActual = 'todos';
 let _marcadoresMapa = [];
 
-// Colores según tipo
+// Colores según tipo (Rojo=Embarazada, Amarillo=Puérpera)
 function _colorMarcador(p, tipo) {
     if (tipo === 'embarazada') return '#d32f2f';   // rojo embarazada
     return '#f9a825';                               // amarillo puérpera
@@ -5072,6 +5074,42 @@ async function abrirMapaZona() {
             };
             _capaActual = 'osm';
             _capasDisponibles.osm.addTo(_mapaZona);
+
+            // --- CONTROL DE PUNTOS CARDINALES (ROSA DE LOS VIENTOS) ---
+            const RosaControl = L.Control.extend({
+                options: { position: 'bottomleft' },
+                onAdd: function() {
+                    const div = L.DomUtil.create('div', 'leaflet-rosa-vientos');
+                    div.innerHTML = `
+                        <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Círculo de fondo con sombra -->
+                            <circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.96)" stroke="#00796b" stroke-width="2.5"/>
+                            <!-- Flecha Norte (arriba) — roja -->
+                            <polygon points="40,5 34,32 40,27 46,32" fill="#d32f2f"/>
+                            <!-- Flecha Sur (abajo) -->
+                            <polygon points="40,75 34,48 40,53 46,48" fill="#78909c"/>
+                            <!-- Flecha Este (derecha) -->
+                            <polygon points="75,40 48,34 53,40 48,46" fill="#78909c"/>
+                            <!-- Flecha Oeste (izquierda) -->
+                            <polygon points="5,40 32,34 27,40 32,46" fill="#78909c"/>
+                            <!-- Círculo central -->
+                            <circle cx="40" cy="40" r="5" fill="#00796b" stroke="white" stroke-width="1.5"/>
+                            <!-- Letras con contorno blanco para legibilidad -->
+                            <text x="40" y="17" text-anchor="middle" font-size="11" font-weight="bold" font-family="sans-serif" stroke="white" stroke-width="3" paint-order="stroke">N</text>
+                            <text x="40" y="17" text-anchor="middle" font-size="11" font-weight="bold" font-family="sans-serif" fill="#d32f2f">N</text>
+                            <text x="40" y="72" text-anchor="middle" font-size="10" font-weight="bold" font-family="sans-serif" stroke="white" stroke-width="3" paint-order="stroke">S</text>
+                            <text x="40" y="72" text-anchor="middle" font-size="10" font-weight="bold" font-family="sans-serif" fill="#455a64">S</text>
+                            <text x="67" y="44" text-anchor="middle" font-size="10" font-weight="bold" font-family="sans-serif" stroke="white" stroke-width="3" paint-order="stroke">E</text>
+                            <text x="67" y="44" text-anchor="middle" font-size="10" font-weight="bold" font-family="sans-serif" fill="#455a64">E</text>
+                            <text x="13" y="44" text-anchor="middle" font-size="10" font-weight="bold" font-family="sans-serif" stroke="white" stroke-width="3" paint-order="stroke">O</text>
+                            <text x="13" y="44" text-anchor="middle" font-size="10" font-weight="bold" font-family="sans-serif" fill="#455a64">O</text>
+                        </svg>`;
+                    L.DomEvent.disableClickPropagation(div);
+                    return div;
+                }
+            });
+            new RosaControl().addTo(_mapaZona);
+
         } else {
             _mapaZona.invalidateSize();
         }
@@ -5171,7 +5209,6 @@ function renderizarMarcadores(filtro) {
                 : '<span style="color:#1976d2;font-size:0.75em;">🖊️ Manual</span>';
 
             const seccion = tipo === 'embarazada' ? 'listado-embarazadas' : 'listado-puerperas';
-
             // ID único para el botón Mover de este marcador
             const btnMoverId = `_btn-mover-${tipo}-${index}`;
 
