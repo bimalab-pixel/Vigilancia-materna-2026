@@ -1,4 +1,4 @@
-f<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -1261,8 +1261,8 @@ f<!DOCTYPE html>
 
 <header>
     <div style="width:100%;display:flex;justify-content:flex-start;padding:6px 10px 0;">
-        <a href="calculadora.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);color:#fff;text-decoration:none;font-size:.82rem;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">
-            ← Gestograma Digital
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);color:#fff;text-decoration:none;font-size:.82rem;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">
+            ← Menú Principal
         </a>
     </div>
     <h1>👩‍⚕️ Vigilancia Materna</h1>
@@ -5914,7 +5914,7 @@ function descargarPDF(index, tipo) {
         notasImpresion.forEach(nota => {
             doc.write(`
                 <div class="nota-final">
-                    <div class="nota-fecha">📅 ${nota.fecha} ${nota.etapa ? '['+nota.etapa+']' : ''}</div>
+                    <div class="nota-fecha">📅 ${nota.fecha ? nota.fecha.split(',')[0] : ''} ${nota.etapa ? '['+nota.etapa+']' : ''}</div>
                     <div style="white-space: pre-wrap; font-size: 13px;">${nota.texto}</div>
                 </div>
             `);
