@@ -1261,8 +1261,8 @@
 
 <header>
     <div style="width:100%;display:flex;justify-content:flex-start;padding:6px 10px 0;">
-        <a href="calculadora.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);color:#fff;text-decoration:none;font-size:.82rem;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">
-            ← GESTOGRAMA DIGITAL
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);color:#fff;text-decoration:none;font-size:.82rem;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.35);backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">
+            ← Menú Principal
         </a>
     </div>
     <h1>👩‍⚕️ Vigilancia Materna</h1>
@@ -5017,17 +5017,32 @@ function _colorMarcador(p, tipo) {
     return '#f9a825';                               // amarillo puérpera
 }
 
-// Ícono SVG de círculo para Leaflet
+// Ícono SVG de círculo para Leaflet, con destello/onda expansiva animada
 function _iconoLeaflet(color) {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
-        <circle cx="14" cy="14" r="11" fill="${color}" stroke="white" stroke-width="2.5"/>
-        <circle cx="14" cy="14" r="4" fill="white" opacity="0.8"/>
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" style="overflow:visible;">
+        <style>
+            .destello-onda {
+                transform-origin: 22px 22px;
+                animation: _destelloMapa 2s ease-out infinite;
+                filter: drop-shadow(0 0 3px ${color}) drop-shadow(0 0 6px ${color});
+            }
+            .destello-onda.d2 { animation-delay: 1s; }
+            @keyframes _destelloMapa {
+                0%   { transform: scale(0.4); opacity: 1; }
+                60%  { opacity: 0.55; }
+                100% { transform: scale(2.3); opacity: 0; }
+            }
+        </style>
+        <circle class="destello-onda" cx="22" cy="22" r="11" fill="none" stroke="${color}" stroke-width="3.5"/>
+        <circle class="destello-onda d2" cx="22" cy="22" r="11" fill="none" stroke="${color}" stroke-width="3.5"/>
+        <circle cx="22" cy="22" r="11" fill="${color}" stroke="white" stroke-width="2.5"/>
+        <circle cx="22" cy="22" r="4" fill="white" opacity="0.8"/>
     </svg>`;
     return L.divIcon({
         html: svg,
         className: '',
-        iconSize: [28, 28],
-        iconAnchor: [14, 14],
+        iconSize: [44, 44],
+        iconAnchor: [22, 22],
         popupAnchor: [0, -16]
     });
 }
