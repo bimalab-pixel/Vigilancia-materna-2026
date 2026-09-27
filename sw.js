@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vigilancia-materna-v3';
+const CACHE_NAME = 'vigilancia-materna-v4';
 
 // Archivos locales para Vigilancia Materna
 const ASSETS = [
