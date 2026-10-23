@@ -8,13 +8,9 @@ const PRECACHE_URLS = [
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
-  './Vigilancia_Materna.html',
   './calculadora_materna.html',
-  './mef.html',
-  './visita_domiciliar.html',
-  './MapaSanitario.html',
-  './CurvasdeCrecimiento.html',
-  './storage-shim.js'
+    './MapaSanitario.html',
+    './storage-shim.js'
 ];
 
 // ── INSTALL: pre-cachear todos los archivos core ──
