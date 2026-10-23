@@ -881,7 +881,8 @@ td.err{color:var(--red);font-weight:700}
 }
 .sync-bar svg{width:14px;height:14px;flex-shrink:0}
 .sync-bar-txt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sync-bar-btns{display:flex;gap:.35rem;flex-shrink:0}
+.sync-bar-btns{display:flex;gap:.35rem;flex-shrink:0;max-width:100%}
+#sync-cfg-btn{max-width:7rem;overflow:hidden;text-overflow:ellipsis}
 .sync-bar-btn{
   background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
   color:#fff;border-radius:8px;padding:.25rem .6rem;font-family:inherit;
@@ -1095,6 +1096,56 @@ td.err{color:var(--red);font-weight:700}
 .mat-item-head strong{font-size:.83rem;color:var(--ink)}
 .mat-item-edad{font-size:.7rem;color:var(--muted);white-space:nowrap}
 .mat-item-row{font-size:.72rem;color:#555;margin-top:.12rem}
+.mef-btn{font-size:.7rem;font-weight:800;color:#880e4f;background:#fff;border:none;
+  border-radius:20px;padding:.35rem .7rem;flex-shrink:0;cursor:pointer;font-family:inherit}
+.lst-acc{display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap}
+.lst-acc-btn{flex:1;min-width:130px;border:none;border-radius:10px;padding:.55rem .8rem;font-size:.78rem;font-weight:800;font-family:inherit;cursor:pointer;background:#0a5c3c;color:#fff}
+.lst-acc-btn.lst-xls{background:#1d6f42}
+.lst-acc-btn:active{transform:scale(.97)}
+#print-root{display:none}
+@media print{
+  html,body{height:auto!important;overflow:visible!important;position:static!important;background:#fff!important}
+  body.imprimiendo > *:not(#print-root){display:none!important}
+  body.imprimiendo #print-root{display:block!important}
+  @page{margin:12mm}
+}
+.mef-modal-box{display:flex;flex-direction:column;overflow:hidden;padding:0}
+.mef-modal-head{flex-shrink:0;padding:1.5rem 1.5rem .7rem;border-bottom:1px solid var(--mist2);background:#fff}
+.mef-modal-head h3{margin-bottom:.35rem}
+.mef-modal-head p{font-size:.78rem;color:var(--muted);margin:0}
+.mef-modal-scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:.8rem 1.5rem 1.5rem}
+@media (orientation:landscape) and (max-height:600px){
+  #modal-mef-detalle,#modal-grupos-menu,#modal-grupo-detalle{padding:.4rem}
+  .gru-grid{grid-template-columns:1fr 1fr 1fr!important}
+  .mef-modal-box{max-width:min(980px,98vw);max-height:96vh;height:96vh}
+  .mef-modal-head{padding:.7rem 3.2rem .5rem 1.2rem}
+  .mef-modal-head h3{font-size:1.05rem;margin-bottom:.15rem}
+  .mef-modal-scroll{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;align-content:start;padding:.6rem 1.2rem 1rem}
+  .mef-modal-scroll .mef-item{margin-bottom:0}
+  .mef-modal-scroll .mat-item-empty{grid-column:1/-1}
+}
+.gru-card{background:linear-gradient(135deg,#00695c,#26a69a);border-radius:12px;padding:.7rem .9rem;display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;box-shadow:0 3px 12px rgba(0,105,92,.28)}
+.gru-icon{font-size:1.8rem;flex-shrink:0;line-height:1}
+.gru-info{flex:1;min-width:0}
+.gru-label{font-size:.62rem;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.06em}
+.gru-sub{font-size:.8rem;font-weight:600;color:#fff;margin-top:.2rem;line-height:1.3}
+.gru-btn-ver{font-size:.7rem;font-weight:800;color:#00695c;background:#fff;border:none;border-radius:20px;padding:.35rem .7rem;flex-shrink:0;cursor:pointer;font-family:inherit}
+.gru-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
+.gru-opt{display:flex;align-items:center;gap:.65rem;width:100%;text-align:left;background:#f1faf8;border:1.5px solid #b2dfdb;border-radius:11px;padding:.6rem .75rem;cursor:pointer;font-family:inherit;color:var(--ink);transition:background .15s}
+.gru-opt:active,.gru-opt:hover{background:#e0f2f1;border-color:#26a69a}
+.gru-opt-ico{font-size:1.4rem;flex-shrink:0;line-height:1}
+.gru-opt-txt{flex:1;min-width:0;font-size:.82rem;font-weight:700;line-height:1.25}
+.gru-opt-txt small{display:block;font-size:.68rem;font-weight:600;color:var(--muted);margin-top:1px}
+.gru-opt-n{background:#00796b;color:#fff;border-radius:10px;font-size:.75rem;font-weight:800;padding:2px 9px;flex-shrink:0}
+.lazy-sentinel{grid-column:1/-1;text-align:center;font-size:.7rem;color:var(--muted);padding:.8rem 0;min-height:1px}
+.mef-item-sx{font-weight:800}
+.mef-item-sx.f{color:#c2185b}.mef-item-sx.m{color:#1565c0}
+.mef-item{display:flex;align-items:center;gap:.6rem;background:#fdf7fa;border:1px solid var(--border);border-radius:9px;padding:.45rem .65rem;margin-bottom:.4rem}
+.mef-item-n{background:#c2185b;color:#fff;border-radius:7px;min-width:1.9rem;height:1.9rem;padding:0 .3rem;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;flex-shrink:0}
+.mef-item-info{flex:1;min-width:0}
+.mef-item-info strong{display:block;font-size:.82rem;color:var(--ink)}
+.mef-item-info span{display:block;font-size:.7rem;color:#555;margin-top:1px}
+.mef-item-viv{font-size:.68rem;font-weight:700;color:#880e4f;background:#fce4ec;border-radius:8px;padding:2px 7px;flex-shrink:0;white-space:nowrap}
 .mat-item-empty{font-size:.78rem;color:var(--muted);text-align:center;padding:.5rem 0}
 .mat-detalle-titulo{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem}
 
@@ -1196,6 +1247,14 @@ td.err{color:var(--red);font-weight:700}
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3.5" cy="6" r="1.5" fill="white" stroke="none"/><circle cx="3.5" cy="12" r="1.5" fill="white" stroke="none"/><circle cx="3.5" cy="18" r="1.5" fill="white" stroke="none"/></svg>
       </div>
       <div class="mbtn-text"><div class="mbt">Listado de Viviendas</div><div class="mbs">Buscar y editar familias</div></div>
+      <div class="mbtn-arr"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </button>
+
+    <button class="mbtn" onclick="abrirModalGruposEtarios()">
+      <div class="mbtn-ico" style="background:rgba(0,150,136,.35)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="mbtn-text"><div class="mbt">Grupos Etarios</div><div class="mbs">Niños, adolescentes, mujeres, adultos…</div></div>
       <div class="mbtn-arr"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
     </button>
 
@@ -1508,6 +1567,7 @@ td.err{color:var(--red);font-weight:700}
     <div class="f-group">
       <label>N° de Vivienda *</label>
       <input type="text" id="mviv-num" placeholder="Ej: 15"/>
+      <div id="mviv-sugerido" style="display:none;font-size:.74rem;color:#166534;margin-top:.3rem;line-height:1.4"></div>
     </div>
     <label class="import-checkbox" style="border-radius:8px;border:1.5px solid var(--border);margin-bottom:.9rem">
       <input type="checkbox" id="mviv-deshabitada" onchange="mvivToggleDeshabitada()"/>
@@ -1591,6 +1651,54 @@ td.err{color:var(--red);font-weight:700}
   </div>
 </div>
 
+<div id="print-root"></div>
+
+<!-- ════════════════
+     MODAL LISTADO MEF
+════════════════ -->
+<div class="modal-bg" id="modal-mef-detalle" onclick="cerrarModal('modal-mef-detalle')">
+  <div class="modal-box mef-modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close-x" onclick="cerrarModal('modal-mef-detalle')">✕</button>
+    <div class="mef-modal-head">
+      <h3>🌸 Mujeres en Edad Fértil</h3>
+      <p id="mef-detalle-sub"></p>
+      <div class="lst-acc">
+        <button type="button" class="lst-acc-btn" onclick="imprimirListadoPersonas()">🖨️ Imprimir / PDF</button>
+        <button type="button" class="lst-acc-btn lst-xls" onclick="copiarListadoExcel()">📋 Copiar a Excel</button>
+      </div>
+    </div>
+    <div id="mef-detalle-lista" class="mef-modal-scroll"></div>
+  </div>
+</div>
+
+<!-- ════════════════
+     MODAL GRUPOS ETARIOS (menú) + LISTADO DEL GRUPO
+════════════════ -->
+<div class="modal-bg" id="modal-grupos-menu" onclick="cerrarModal('modal-grupos-menu')">
+  <div class="modal-box mef-modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close-x" onclick="cerrarModal('modal-grupos-menu')">✕</button>
+    <div class="mef-modal-head">
+      <h3>👨‍👩‍👧‍👦 Grupos etarios</h3>
+      <p>Elige un grupo para ver su listado.</p>
+    </div>
+    <div class="mef-modal-scroll"><div class="gru-grid" id="gru-menu-lista"></div></div>
+  </div>
+</div>
+<div class="modal-bg" id="modal-grupo-detalle" onclick="cerrarModal('modal-grupo-detalle')">
+  <div class="modal-box mef-modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close-x" onclick="cerrarModal('modal-grupo-detalle')">✕</button>
+    <div class="mef-modal-head">
+      <h3 id="grupo-detalle-titulo">Grupo</h3>
+      <p id="grupo-detalle-sub"></p>
+      <div class="lst-acc">
+        <button type="button" class="lst-acc-btn" onclick="imprimirListadoPersonas()">🖨️ Imprimir / PDF</button>
+        <button type="button" class="lst-acc-btn lst-xls" onclick="copiarListadoExcel()">📋 Copiar a Excel</button>
+      </div>
+    </div>
+    <div id="grupo-detalle-lista" class="mef-modal-scroll"></div>
+  </div>
+</div>
+
 <!-- ════════════════
      MODAL IMPORTAR EXCEL
 ════════════════ -->
@@ -1599,7 +1707,7 @@ td.err{color:var(--red);font-weight:700}
     <div style="padding:1.3rem 1.4rem .9rem;background:linear-gradient(135deg,var(--ink),var(--ink2));color:#fff;position:relative;">
       <button class="modal-close-x" style="background:rgba(255,255,255,.15);color:#fff" onclick="cerrarModal('modal-importar')">✕</button>
       <h3 style="color:#fff;font-family:'Instrument Serif',serif;font-size:1.15rem;margin-bottom:.2rem">Importar Catálogo</h3>
-      <p style="color:rgba(255,255,255,.55);font-size:.77rem;margin:0">Formato Excel (.xlsx, .xls) o CSV · Columnas: Vivienda | Nombre | Fecha Nacimiento | Riesgo | Sexo</p>
+      <p style="color:rgba(255,255,255,.55);font-size:.77rem;margin:0">Formato Excel (.xlsx, .xls) o CSV · Acepta el Excel exportado por el Mapa (con ubicación) o la plantilla</p>
     </div>
 
     <!-- Paso 1: subir -->
@@ -1730,52 +1838,6 @@ td.err{color:var(--red);font-weight:700}
 <!-- ════════════════
      MODAL UID / PROMOTOR
 ════════════════ -->
-<div class="modal-bg" id="modal-uid" onclick="event.stopPropagation()">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <button class="modal-close-x" onclick="cerrarModal('modal-uid')">✕</button>
-    <h3>☁️ Configurar Sync</h3>
-    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem">
-      Ingresa tu código de promotor. Este código identifica tus datos en la nube.
-      Usa el mismo en todos tus dispositivos.
-    </p>
-    <input class="uid-input" type="text" id="uid-input"
-      placeholder="Ej: PROMOTOR_01"
-      maxlength="30" autocomplete="off" autocapitalize="characters"
-      oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9_]/g,'')"/>
-    <div class="uid-hint">Solo letras, números y guión bajo. Sin espacios ni tildes.</div>
-    <div class="modal-btns">
-      <button class="btn cancel" onclick="cerrarModal('modal-uid')">Cancelar</button>
-      <button class="btn save" onclick="guardarUID()">✅ Guardar</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-bg" id="modal-encabezado" onclick="event.stopPropagation()">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <button class="modal-close-x" onclick="cerrarModal('modal-encabezado')">✕</button>
-    <h3>📍 Datos del Encabezado</h3>
-    <p style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem">
-      Esta información se muestra en la pantalla de inicio y en el mapa.
-    </p>
-    <div class="f-group">
-      <label>Cantón / Zona</label>
-      <input type="text" id="enc-canton" placeholder="Ej: Cantón Las Piletas" maxlength="60" autocomplete="off"/>
-    </div>
-    <div class="f-group">
-      <label>Promotor de Salud</label>
-      <input type="text" id="enc-promotor" placeholder="Ej: Moisés López" maxlength="60" autocomplete="off"/>
-    </div>
-    <div class="f-group">
-      <label>Unidad de Salud</label>
-      <input type="text" id="enc-unidad" placeholder="Ej: UCSF Venecia" maxlength="60" autocomplete="off"/>
-    </div>
-    <div class="modal-btns">
-      <button class="btn cancel" onclick="cerrarModal('modal-encabezado')">Cancelar</button>
-      <button class="btn save" onclick="guardarEncabezado()">✅ Guardar</button>
-    </div>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <!-- ════════════════════════════════════════════
@@ -1799,15 +1861,30 @@ function calcRiesgoAuto(n){
 // Si riesgoManual===undefined se recalcula siempre (usado en import/carga inicial)
 // Si una vivienda marcada como deshabitada recibe integrantes (por registro manual,
 // importación Excel o sincronización RD→MS), se reactiva automáticamente como habitada.
+// Integrantes ACTIVOS (los inactivos se quedan en el catálogo pero no cuentan en grupos ni totales)
+function _perActivas(v){ return ((v&&v.personas)||[]).filter(p=>!p.inactivo); }
+function togglePersonaInactiva(vivId,perId){
+  const cat=getCatalogo(); const v=cat.find(x=>x.id===vivId); if(!v) return;
+  const p=(v.personas||[]).find(x=>x.id===perId); if(!p) return;
+  const ts=new Date().toISOString();
+  if(p.inactivo){ delete p.inactivo; delete p.inactivoDesde; }
+  else { p.inactivo=true; p.inactivoDesde=ts.slice(0,10); }
+  v.actualizadoEn=ts;
+  recalcRiesgoVivienda(v);
+  saveCatalogo(cat);renderCatalogo();actualizarHome();
+  if(_mapaZona) renderMarcadores(_filtroMapa);
+  try{ const mf=document.getElementById('modal-familia'); if(mf&&mf.classList.contains('show')) _mfamRender(); }catch(e){}
+  toast(p.inactivo?('⏸ '+p.nombre+' marcado/a como INACTIVO/A (no cuenta en los grupos)'):('▶️ '+p.nombre+' activo/a de nuevo'),'success');
+}
 function _reactivarSiTienePersonas(v){
-  if(v.deshabitada && v.personas && v.personas.length>0){
+  if(v.deshabitada && _perActivas(v).length>0){
     v.deshabitada=false;
   }
 }
 function recalcRiesgoVivienda(v){
   // Si tiene flag de override manual, no tocar
   if(v._riesgoManual) return;
-  const n=(v.personas||[]).length;
+  const n=_perActivas(v).length;
   v.riesgo=calcRiesgoAuto(n);
 }
 
@@ -1835,7 +1912,7 @@ function _mvivSetRiesgo(vivId){
     document.getElementById('mviv-riesgo').value=v.riesgo||'ninguno';
     if(chip){chip.textContent='✏️ Manual';chip.className='riesgo-auto-chip manual';}
   } else {
-    const n=v?(v.personas||[]).length:0;
+    const n=v?_perActivas(v).length:0;
     const auto=calcRiesgoAuto(n);
     document.getElementById('mviv-riesgo').value=auto;
     if(chip){chip.textContent='⚡ Auto';chip.className='riesgo-auto-chip auto';}
@@ -1936,7 +2013,7 @@ function actualizarHome(){
     if(v.deshabitada){ desh++; if(v.lat&&v.lng)geo++; return; }
     const r=v.riesgo||'ninguno';
     if(r==='alto')alt++;else if(r==='medio')med++;else sin++;
-    pers+=(v.personas||[]).length;
+    pers+=_perActivas(v).length;
     if(v.lat&&v.lng)geo++;
   });
   document.getElementById('hc-sin').textContent=sin;
@@ -2059,19 +2136,20 @@ function renderCatalogo(opcs){
         return `<button type="button" class="cat-persona-item highlight-result" style="width:100%;text-align:left;background:#fefce8;border:none;border-left:3px solid #eab308;cursor:pointer;font-family:inherit;padding:.55rem 1rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--mist2);" onclick="abrirModalFamilia('${viv.id}','${p.id}')">
           <span class="cat-per-ico">👤</span>
           <div class="cat-per-info" style="flex:1;min-width:0">
-            <strong style="display:block;font-size:.82rem;color:var(--ink)">${p.nombre}</strong>
+            <strong style="display:block;font-size:.82rem;color:var(--ink)">${p.nombre}${p.inactivo?' <span style="font-size:.66rem;background:#9ca3af;color:#fff;border-radius:6px;padding:1px 6px">INACTIVO</span>':''}</strong>
             <span style="font-size:.7rem;color:var(--muted)">${edad?'🎂 '+edad:'Sin edad'}${p.fnac?' · Nac. '+p.fnac.split('-').reverse().join('/'):''}</span>
             <span style="display:block;font-size:.7rem;color:var(--teal);font-weight:700;margin-top:2px">✏️ Ver y editar familia completa</span>
           </div>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" style="flex-shrink:0;opacity:.4"><path d="M9 18l6-6-6-6"/></svg>
         </button>`;
       }
-      return `<div class="cat-persona-item">
-        <span class="cat-per-ico">👤</span>
+      return `<div class="cat-persona-item" style="${p.inactivo?'opacity:.6;background:#f3f4f6;':''}">
+        <span class="cat-per-ico">${p.inactivo?'⏸':'👤'}</span>
         <div class="cat-per-info">
-          <strong>${p.nombre}</strong>
-          <span>${edad?'🎂 '+edad:'Sin edad'}${p.fnac?' · Nac. '+p.fnac.split('-').reverse().join('/'):''}</span>
+          <strong>${p.nombre}${p.inactivo?' <span style="font-size:.68rem;background:#9ca3af;color:#fff;border-radius:6px;padding:1px 6px;margin-left:4px">INACTIVO</span>':''}</strong>
+          <span>${edad?'🎂 '+edad:'Sin edad'}${p.fnac?' · Nac. '+p.fnac.split('-').reverse().join('/'):''}${p.inactivo&&p.inactivoDesde?' · desde '+p.inactivoDesde.split('-').reverse().join('/'):''}</span>
         </div>
+        <button class="cat-per-edit" onclick="togglePersonaInactiva('${viv.id}','${p.id}')" title="${p.inactivo?'Activar de nuevo':'Marcar inactivo (se fue de la comunidad)'}" style="font-size:.95rem">${p.inactivo?'▶️':'⏸'}</button>
         <button class="cat-per-edit" onclick="abrirEditPersona('${viv.id}','${p.id}')" title="Editar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         </button>
@@ -2141,16 +2219,35 @@ function renderCatalogo(opcs){
 }
 
 // ── CRUD VIVIENDA ──
+// Siguiente número de vivienda: toma el mayor número ya registrado (usa los dígitos iniciales,
+// así "15-A" cuenta como 15) y le suma 1. Si no hay viviendas, sugiere 1.
+function siguienteNumeroVivienda(){
+  let max=0;
+  getCatalogo().forEach(v=>{
+    const m=String(v&&v.vivienda!=null?v.vivienda:'').trim().match(/^\d+/);
+    if(m){const n=parseInt(m[0],10); if(n>max) max=n;}
+  });
+  return {ultimo:max, siguiente:max+1};
+}
 function abrirNuevaVivienda(){
   _editVivId=null;
   document.getElementById('mviv-titulo').textContent='Nueva Vivienda';
   document.getElementById('mviv-sub').textContent='Registra el número y el nivel de riesgo sanitario.';
-  document.getElementById('mviv-num').value='';
+  const _sug=siguienteNumeroVivienda();
+  const _inp=document.getElementById('mviv-num');
+  _inp.value=String(_sug.siguiente);   // propuesto: se puede borrar o cambiar antes de guardar
+  const _hint=document.getElementById('mviv-sugerido');
+  if(_hint){
+    _hint.innerHTML=_sug.ultimo>0
+      ?'💡 Número sugerido: <strong>'+_sug.siguiente+'</strong> (la última vivienda registrada es la '+_sug.ultimo+'). Puedes cambiarlo si lo necesitas.'
+      :'💡 Aún no hay viviendas registradas: se sugiere empezar con <strong>1</strong>. Puedes cambiarlo.';
+    _hint.style.display='block';
+  }
   document.getElementById('mviv-deshabitada').checked=false;
   mvivToggleDeshabitada();
   _mvivSetRiesgo(null);
   abrirModal('modal-vivienda');
-  setTimeout(()=>document.getElementById('mviv-num').focus(),80);
+  setTimeout(()=>{_inp.focus();_inp.select();},80);
 }
 function abrirEditVivienda(id){
   const cat=getCatalogo(); const v=cat.find(x=>x.id===id); if(!v) return;
@@ -2158,6 +2255,7 @@ function abrirEditVivienda(id){
   document.getElementById('mviv-titulo').textContent='Editar Vivienda '+v.vivienda;
   document.getElementById('mviv-sub').textContent='Modifica los datos de esta vivienda.';
   document.getElementById('mviv-num').value=v.vivienda;
+  const _h2=document.getElementById('mviv-sugerido'); if(_h2) _h2.style.display='none';
   document.getElementById('mviv-deshabitada').checked=!!v.deshabitada;
   mvivToggleDeshabitada();
   _mvivSetRiesgo(id);
@@ -2287,7 +2385,7 @@ function guardarPersona(){
   }
   v.actualizadoEn=ts;
   // Reactivar la vivienda si estaba marcada deshabitada y ahora tiene integrantes
-  const _seReactivo=v.deshabitada && v.personas.length>0;
+  const _seReactivo=v.deshabitada && _perActivas(v).length>0;
   _reactivarSiTienePersonas(v);
   // Recalcular riesgo automático si no tiene override manual
   recalcRiesgoVivienda(v);
@@ -2531,7 +2629,7 @@ function iconoLeaflet(color, label){
 // Filtros demográficos: ¿algún integrante de la vivienda cumple el criterio?
 function _vivCumpleDemografico(viv,filtro){
   if(viv.deshabitada) return false;
-  return (viv.personas||[]).some(p=>{
+  return _perActivas(viv).some(p=>{
     const m=mesesPersona(p);
     if(m===null) return false;
     if(filtro==='ninos2') return m<24;
@@ -2574,8 +2672,9 @@ function renderMarcadores(filtro){
       if(filtro==='rojo'&&rk!=='alto') return;
     }
 
-    const jefe=(viv.personas&&viv.personas.length)?viv.personas[0].nombre:'—';
-    const nP=viv.personas?viv.personas.length:0;
+    const _pa=_perActivas(viv);
+    const jefe=_pa.length?_pa[0].nombre:'—';
+    const nP=_pa.length;
     if(!viv.lat||!viv.lng){sinUbic.push(viv);return;}
     conUbic++;
 
@@ -2584,8 +2683,8 @@ function renderMarcadores(filtro){
     const bgN=desh?'#f5f5f5':rk==='alto'?'#ffebee':rk==='medio'?'#fefce8':'#f0fdf4';
     const bdN=desh?'#757575':rk==='alto'?'#c62828':rk==='medio'?'#eab308':'#16a34a';
 
-    const intList=(viv.personas||[]).slice(0,5).map(p=>`<div style="font-size:.77em;padding:2px 0;border-bottom:1px solid #f0f0f0;color:#444;">👤 ${p.nombre}${p.edad?' <span style="color:#888;font-size:.9em">· '+p.edad+'</span>':''}</div>`).join('')
-      +(viv.personas&&viv.personas.length>5?`<div style="font-size:.72em;color:#888;padding-top:2px">…y ${viv.personas.length-5} más</div>`:'');
+    const intList=_pa.slice(0,5).map(p=>`<div style="font-size:.77em;padding:2px 0;border-bottom:1px solid #f0f0f0;color:#444;">👤 ${p.nombre}${p.edad?' <span style="color:#888;font-size:.9em">· '+p.edad+'</span>':''}</div>`).join('')
+      +(_pa.length>5?`<div style="font-size:.72em;color:#888;padding-top:2px">…y ${_pa.length-5} más</div>`:'');
 
     const popupHTML=`<div style="min-width:190px;max-width:215px;font-family:sans-serif;padding:2px;">
       <div style="background:linear-gradient(135deg,#0c1f18,#1a3a2d);color:#fff;padding:7px 10px;border-radius:7px 7px 0 0;margin:-2px -2px 8px;display:flex;align-items:center;gap:6px;">
@@ -2747,8 +2846,9 @@ function _sghRenderLista(lista) {
     const rkClass = rk === 'alto' ? 'alt' : rk === 'medio' ? 'med' : 'sin';
     const rkLabel = rk === 'alto' ? 'Alto' : rk === 'medio' ? 'Medio' : 'Sin Riesgo';
     const ubic = v.lat && v.lng ? `✅ ${Number(v.lat).toFixed(4)}, ${Number(v.lng).toFixed(4)}` : '⚠️ Sin ubicación';
-    const nP = (v.personas || []).length;
-    const jefe = (v.personas && v.personas.length) ? v.personas[0].nombre : 'Sin integrantes';
+    const _pa = _perActivas(v);
+    const nP = _pa.length;
+    const jefe = _pa.length ? _pa[0].nombre : 'Sin integrantes';
     return `<div class="sgh-item" onclick="seleccionarVivGeoRef('${v.id}')">
       <span class="sgh-item-ico">🏠</span>
       <div class="sgh-item-txt">
@@ -2883,7 +2983,7 @@ function renderStats(){
   cat.forEach(v=>{
     const r=v.riesgo||'ninguno';
     if(r==='alto')alt++;else if(r==='medio')med++;else sin++;
-    (v.personas||[]).forEach(p=>{
+    _perActivas(v).forEach(p=>{
       total++;
       const sx=p.sexo||'';
       if(sx==='F')fem++;else if(sx==='M')masc++;else nd++;
@@ -2929,6 +3029,7 @@ function renderStats(){
       <div class="mef-sub">18 – 49 años · de ${fem} femeninas registradas</div>
     </div>
     ${fem>0?`<span class="mef-pct">${mefPct}%</span>`:''}
+    <button class="mef-btn" onclick="abrirModalMEFDetalle()" title="Ver listado de MEF">📋 Ver</button>
   </div>`:'';
 
   // Tarjeta Embarazadas / Puérperas (leídas de Vigilancia_Materna vía localStorage)
@@ -2944,6 +3045,16 @@ function renderStats(){
     <button class="mat-btn" onclick="abrirModalMaternoDetalle()" title="Ver listado detallado">📋 Ver</button>
   </div>`;
 
+  // Tarjeta Grupos etarios
+  const gruHtml=`<div class="gru-card">
+    <span class="gru-icon">👨‍👩‍👧‍👦</span>
+    <div class="gru-info">
+      <div class="gru-label">Grupos etarios</div>
+      <div class="gru-sub">Niños, adolescentes, mujeres, adultos y adultos mayores</div>
+    </div>
+    <button class="gru-btn-ver" onclick="abrirModalGruposEtarios()" title="Ver grupos etarios">📋 Ver</button>
+  </div>`;
+
   const maxN=Math.max(...conteo,1);
   const filasHtml=GRUPOS_EDAD.map((g,i)=>{
     const n=conteo[i],nm=conteoM[i],nf=conteoF[i];
@@ -2957,7 +3068,7 @@ function renderStats(){
     </tr>`;
   }).join('');
   const totM=conteoM.reduce((a,b)=>a+b,0),totF=conteoF.reduce((a,b)=>a+b,0),totN=conteo.reduce((a,b)=>a+b,0);
-  tablaEl.innerHTML= sexoHtml + mefHtml + matHtml + `<div class="edad-list-scroll">
+  tablaEl.innerHTML= sexoHtml + mefHtml + matHtml + gruHtml + `<div class="edad-list-scroll">
     <table class="edad-table">
       <colgroup><col class="c-rango"><col class="c-num"><col class="c-num"><col class="c-total"><col class="c-pct"></colgroup>
       <thead><tr><th>Rango</th><th>M</th><th>F</th><th>Total</th><th>%</th></tr></thead>
@@ -2996,12 +3107,12 @@ function leerArchivo(file){
         const sep=txt.indexOf(';')!==-1?';':',';
         const lines=txt.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
         if(lines.length<2){mostrarError('Archivo vacío o sin datos.');return;}
-        const filas=lines.slice(1).map(l=>{
+        const todas=lines.map(l=>{
           const cols=[];let dentro=false,campo='';
           for(let i=0;i<l.length;i++){const c=l[i];if(c==='"')dentro=!dentro;else if(c===sep&&!dentro){cols.push(campo.trim());campo='';}else campo+=c;}
           cols.push(campo.trim());return cols;
         });
-        procesarFilas(filas);
+        procesarFilas(todas.slice(1),todas[0]);
       }catch(err){mostrarError('Error CSV: '+err.message);}
     };
     r.readAsText(file,'UTF-8'); return;
@@ -3015,7 +3126,7 @@ function leerArchivo(file){
         const ws=wb.Sheets[wb.SheetNames[0]];
         const datos=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
         if(datos.length<2){mostrarError('Archivo vacío o sin datos.');return;}
-        procesarFilas(datos.slice(1).filter(r=>r.some(c=>String(c).trim()!=='')));
+        procesarFilas(datos.slice(1).filter(r=>r.some(c=>String(c).trim()!=='')),datos[0]);
       }catch(err){mostrarError('Error Excel: '+err.message);}
     };
     r.readAsArrayBuffer(file); return;
@@ -3023,24 +3134,53 @@ function leerArchivo(file){
   mostrarError('Formato no compatible. Usa .xlsx, .xls o .csv');
 }
 
-function procesarFilas(filas){
-  // Columnas: 0=vivienda, 1=nombre, 2=fecha nacimiento, 3=riesgo (opcional), 4=sexo (opcional)
+// Detecta las columnas por NOMBRE de encabezado (el orden ya no importa).
+// Si el encabezado no se reconoce, usa el orden clásico: Vivienda|Nombre|Fecha|Riesgo|Sexo.
+function _mapaIdxCols(h){
+  const clasico={viv:0,nom:1,fnac:2,riesgo:3,sexo:4,lat:-1,lng:-1,exp:false};
+  if(!h||!h.length) return clasico;
+  const n=s=>String(s==null?'':s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+  const m={viv:-1,nom:-1,fnac:-1,riesgo:-1,sexo:-1,lat:-1,lng:-1};
+  h.forEach((c,i)=>{
+    const k=n(c); if(!k) return;
+    if(k.includes('vivienda')&&m.viv<0) m.viv=i;
+    else if(k.includes('nombre')&&m.nom<0) m.nom=i;
+    else if((k.includes('nacimiento')||k==='fnac')&&m.fnac<0) m.fnac=i;
+    else if(k.includes('riesgo')&&m.riesgo<0) m.riesgo=i;
+    else if(k.includes('sexo')&&m.sexo<0) m.sexo=i;
+    else if((k==='latitud'||k==='lat')&&m.lat<0) m.lat=i;
+    else if((k==='longitud'||k==='lng'||k==='lon'||k==='long')&&m.lng<0) m.lng=i;
+  });
+  if(m.viv<0||m.nom<0) return clasico;
+  m.exp=m.lat>=0&&m.lng>=0;
+  return m;
+}
+function _numCoord(v){const n=parseFloat(String(v==null?'':v).replace(',','.'));return isFinite(n)?n:null;}
+
+function procesarFilas(filas,hdr){
+  const ix=_mapaIdxCols(hdr);
   const res=[]; let err=0; let ultViv='';
   filas.forEach(cols=>{
-    let viv=String(cols[0]??'').trim();
-    const nom=String(cols[1]??'').trim();
-    let fnacRaw=String(cols[2]??'').trim();
-    const riesgoRaw=String(cols[3]??'').trim().toLowerCase();
-    const sexoRaw=String(cols[4]??'').trim().toLowerCase();
+    const g=i=>i>=0?cols[i]:'';
+    let viv=String(g(ix.viv)??'').trim();
+    const nom=String(g(ix.nom)??'').trim();
+    let fnacRaw=String(g(ix.fnac)??'').trim();
+    const riesgoRaw=String(g(ix.riesgo)??'').trim().toLowerCase();
+    const sexoRaw=String(g(ix.sexo)??'').trim().toLowerCase();
+    const latN=_numCoord(g(ix.lat)), lngN=_numCoord(g(ix.lng));
+    const geo=latN!=null&&lngN!=null&&Math.abs(latN)<=90&&Math.abs(lngN)<=180&&!(latN===0&&lngN===0);
     if(!viv&&!nom) return;
     if(!viv&&nom) viv=ultViv;
     if(viv) ultViv=viv;
-    if(!viv||!nom) err++;
+    const desh=/deshab/.test(riesgoRaw);
+    // Fila de vivienda sin integrantes (deshabitada, con ubicación o con riesgo): es válida
+    const soloViv=!!viv&&!nom&&(desh||geo||riesgoRaw!=='');
+    const _err=!viv||(!nom&&!soloViv);
+    if(_err) err++;
     // Normalizar riesgo
     let riesgo='ninguno';
     if(/alto|high|alrp/.test(riesgoRaw)) riesgo='alto';
     else if(/medio|med|moderate/.test(riesgoRaw)) riesgo='medio';
-    else if(/sin|bajo|no|none|low/.test(riesgoRaw)) riesgo='ninguno';
     // Normalizar sexo → 'F', 'M' o ''
     let sexo='';
     if(/^f|fem|mujer|femenino/.test(sexoRaw)) sexo='F';
@@ -3048,7 +3188,8 @@ function procesarFilas(filas){
     // Normalizar fecha
     if(/^\d{4,6}$/.test(fnacRaw)){const iso=serialExcelAFecha(parseInt(fnacRaw));fnacRaw=iso;}
     else fnacRaw=normalISO(fnacRaw);
-    res.push({viv,nom,fnac:fnacRaw,riesgo,sexo,_err:!viv||!nom});
+    res.push({viv,nom,fnac:fnacRaw,riesgo,sexo,lat:geo?latN:null,lng:geo?lngN:null,
+      desh,soloViv,riesgoExp:riesgoRaw!==''&&!desh,exp:ix.exp,_err});
   });
   if(!res.length){mostrarError('No se encontraron filas válidas.');return;}
   _impFilas=res;
@@ -3062,7 +3203,7 @@ function procesarFilas(filas){
     const sColor=f.sexo==='F'?'color:#c2185b':f.sexo==='M'?'color:#1565c0':'color:#aaa';
     return `<tr>
       <td class="${f._err&&!f.viv?'err':''}">${f.viv||'⚠ vacío'}</td>
-      <td class="${f._err&&!f.nom?'err':''}">${f.nom||'⚠ vacío'}</td>
+      <td class="${f._err&&!f.nom?'err':''}">${f.nom||(f.soloViv?'<i style="color:#888">'+(f.desh?'🏚️ Deshabitada':'Sin integrantes')+'</i>':'⚠ vacío')}</td>
       <td><strong>${edad}</strong><br><span style="font-size:.68em;color:#666">${fnacDisp}</span></td>
       <td>${rMap[f.riesgo]||rMap.ninguno}</td>
       <td style="font-weight:700;font-size:.8rem;${sColor}">${sMap[f.sexo]??'—'}</td>
@@ -3070,11 +3211,34 @@ function procesarFilas(filas){
   }).join('');
 
   const vivU=new Set(res.filter(f=>!f._err).map(f=>f.viv)).size;
-  const val=res.filter(f=>!f._err).length;
-  document.getElementById('imp-resumen').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M9 11l3 3L22 4"/></svg> ${val} personas en ${vivU} vivienda${vivU!==1?'s':''}${err?` · ⚠ ${err} fila${err>1?'s':''} con datos incompletos`:''}`;
+  const val=res.filter(f=>!f._err&&!f.soloViv).length;
+  const geoN=new Set(res.filter(f=>!f._err&&f.lat!=null).map(f=>f.viv)).size;
+  document.getElementById('imp-resumen').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M9 11l3 3L22 4"/></svg> ${val} personas en ${vivU} vivienda${vivU!==1?'s':''}${geoN?` · 📍 ${geoN} con ubicación`:''}${err?` · ⚠ ${err} fila${err>1?'s':''} con datos incompletos`:''}`;
   const syncRadio=document.getElementById('imp-modo-sync');if(syncRadio)syncRadio.checked=true;
   document.getElementById('imp-paso1').style.display='none';
   document.getElementById('imp-paso2').style.display='block';
+}
+
+// Aplica a la vivienda lo que trae el Excel además de las personas:
+// ubicación (lat/lng), estado deshabitada y riesgo manual.
+function _aplicarMetaImport(v,filaViv,ts){
+  const f0=filaViv[0];
+  const gf=filaViv.find(f=>f.lat!=null&&f.lng!=null);
+  if(gf && (v.lat!==gf.lat||v.lng!==gf.lng)){
+    v.lat=gf.lat; v.lng=gf.lng; v.origen_ubic=v.origen_ubic||'manual'; v.actualizadoEn=ts;
+  }
+  const hayPers=(v.personas||[]).length>0;
+  if(filaViv.some(f=>f.desh)){
+    if(!hayPers){ v.deshabitada=true; v.riesgo='ninguno'; v._riesgoManual=false; v.actualizadoEn=ts; }
+    return;
+  }
+  if(f0.exp && v.deshabitada && !hayPers) v.deshabitada=false; // el archivo manda
+  if(f0.riesgoExp){
+    const auto=calcRiesgoAuto((v.personas||[]).length);
+    if(f0.riesgo!==auto && (f0.riesgo!=='ninguno'||f0.exp)){
+      v.riesgo=f0.riesgo; v._riesgoManual=true; v.actualizadoEn=ts;
+    } else if(f0.exp){ v._riesgoManual=false; }
+  }
 }
 
 function confirmarImport(){
@@ -3112,28 +3276,28 @@ function confirmarImport(){
     if(modo === 'sync'){
       // ── SINCRONIZAR: el Excel es la fuente de verdad para personas ──
       // Preservar ids existentes por nombre+fnac para no romper referencias
-      const idExistente = new Map(
-        (v.personas||[]).map(p=>[
-          (String(p.nombre||'').toLowerCase().trim()+'|'+String(p.fnac||'').trim()), p.id
-        ])
-      );
-      v.personas = filaViv.map(f=>{
+      const _kPer = p => (String(p.nombre||'').toLowerCase().trim()+'|'+String(p.fnac||'').trim());
+      const prevPers = (v.personas||[]);
+      const idExistente = new Map(prevPers.map(p=>[_kPer(p), p.id]));
+      const inactPrev = new Map(prevPers.filter(p=>p.inactivo).map(p=>[_kPer(p), p]));
+      v.personas = filaViv.filter(f=>!f.soloViv).map(f=>{
         const key = (f.nom.toLowerCase().trim()+'|'+(f.fnac||'').trim());
         const edad = f.fnac ? calcularEdadTexto(f.fnac)||'' : '';
-        return {
+        const o = {
           id: idExistente.get(key) || ('per_'+Date.now()+'_'+Math.random().toString(36).slice(2,6)),
           nombre: f.nom, fnac: f.fnac||'', edad, sexo: f.sexo||''
         };
+        const ia = inactPrev.get(key);
+        if(ia){ o.inactivo = true; if(ia.inactivoDesde) o.inactivoDesde = ia.inactivoDesde; inactPrev.delete(key); }
+        return o;
       });
-      // Actualizar riesgo solo si no fue fijado manualmente
-      if(!v._riesgoManual && filaViv[0].riesgo && filaViv[0].riesgo!=='ninguno')
-        v.riesgo = filaViv[0].riesgo;
+      // Los inactivos que no vienen en el Excel NO se borran (pueden volver a la comunidad)
+      inactPrev.forEach(p => v.personas.push(p));
       v.actualizadoEn = ts;
 
     } else {
       // ── SOLO AGREGAR: fusionar sin eliminar ──
-      if(filaViv[0].riesgo && filaViv[0].riesgo!=='ninguno') v.riesgo = filaViv[0].riesgo;
-      filaViv.forEach(f=>{
+      filaViv.filter(f=>!f.soloViv).forEach(f=>{
         const normNom = f.nom.toLowerCase().trim();
         const normFnac = (f.fnac||'').trim();
         const yaExiste = (v.personas||[]).some(p=>{
@@ -3154,6 +3318,12 @@ function confirmarImport(){
     }
   });
 
+  // Ubicación, deshabitada y riesgo (ya con las personas definitivas de cada vivienda)
+  vivExcel.forEach((filaViv,vivNom)=>{
+    const v=catByViv.get(String(vivNom).trim());
+    if(v) _aplicarMetaImport(v,filaViv,ts);
+  });
+
   // Recalcular riesgo automático en todas las viviendas afectadas
   cat.forEach(v=>{ _reactivarSiTienePersonas(v); if(!v._riesgoManual) recalcRiesgoVivienda(v); });
   saveCatalogo(cat);
@@ -3161,7 +3331,7 @@ function confirmarImport(){
   renderCatalogo(); actualizarHome();
   if(_mapaZona) renderMarcadores(_filtroMapa);
   const vivU = vivExcel.size;
-  const totalPer = filas.length;
+  const totalPer = filas.filter(f=>!f.soloViv).length;
   const modoLabel = modo==='sync' ? '🔄 Sincronizado' : '➕ Fusionado';
   toast(`✅ ${modoLabel} · ${totalPer} personas en ${vivU} viviendas`,'success',3500);
 }
@@ -3488,10 +3658,214 @@ function _sumarDiasISO(iso,dias){
   return d.toISOString().slice(0,10);
 }
 function _edadMaterna(p){
+  // Vigilancia_Materna guarda la fecha como "fecha_nacimiento" (opcional); se muestra en años cumplidos
+  if(p.fecha_nacimiento){
+    const f=new Date(String(p.fecha_nacimiento)+'T00:00:00'), hoy=new Date();
+    if(!isNaN(f) && f<=hoy){
+      let a=hoy.getFullYear()-f.getFullYear();
+      if(hoy.getMonth()<f.getMonth() || (hoy.getMonth()===f.getMonth() && hoy.getDate()<f.getDate())) a--;
+      return a+' año'+(a!==1?'s':'');
+    }
+  }
   if(p.fnac){ const t=calcularEdadTexto(p.fnac); if(t) return t; }
   if(p.edad) return (/^\d+$/.test(String(p.edad))) ? p.edad+' años' : p.edad;
   return '—';
 }
+// ── Tarjeta de persona para los listados (MEF / grupos etarios) ──
+function _itemPersonaHtml(p,i,mostrarSexo){
+  const sx=mostrarSexo&&p.sexo
+    ? ` <span class="mef-item-sx ${p.sexo==='F'?'f':'m'}">${p.sexo==='F'?'♀':'♂'}</span>` : '';
+  return `<div class="mef-item">
+    <div class="mef-item-n">${i+1}</div>
+    <div class="mef-item-info">
+      <strong>${_mlvEsc(p.nombre)}${sx}</strong>
+      <span>📅 Nac. ${_fmtFechaISO(p.fnac)}</span>
+      <span>🎂 ${calcularEdadTexto(p.fnac)||(Math.floor(p.meses/12)+' años')}</span>
+    </div>
+    <span class="mef-item-viv">Viv. ${_mlvEsc(p.viv)}</span>
+  </div>`;
+}
+
+// ── Carga progresiva: pinta un lote y, al acercarse al final del scroll, el siguiente ──
+let _lazyObs=null;
+function _listaLazy(el,lista,itemFn,lote){
+  lote=lote||25;
+  if(_lazyObs){_lazyObs.disconnect();_lazyObs=null;}
+  el.innerHTML='';
+  el.scrollTop=0;
+  if(!('IntersectionObserver' in window)){          // navegador sin soporte: pinta todo
+    el.innerHTML=lista.map(itemFn).join('');
+    return;
+  }
+  let idx=0;
+  const sent=document.createElement('div');
+  sent.className='lazy-sentinel';
+  const actualizar=()=>{ sent.textContent='Cargando más… ('+idx+' de '+lista.length+')'; };
+  const cargar=()=>{
+    const fin=Math.min(idx+lote,lista.length);
+    let html='';
+    for(;idx<fin;idx++) html+=itemFn(lista[idx],idx);
+    sent.insertAdjacentHTML('beforebegin',html);
+    if(idx>=lista.length){
+      if(_lazyObs){_lazyObs.disconnect();_lazyObs=null;}
+      sent.remove();
+    } else actualizar();
+  };
+  el.appendChild(sent);
+  cargar();                                          // primer lote inmediato
+  _lazyObs=new IntersectionObserver(es=>{
+    if(!es.some(e=>e.isIntersecting)) return;
+    cargar();
+    // re-observar para que, si el centinela sigue visible (lote corto), vuelva a disparar
+    if(_lazyObs&&sent.isConnected){_lazyObs.unobserve(sent);_lazyObs.observe(sent);}
+  },{root:el,rootMargin:'400px 0px'});
+  _lazyObs.observe(sent);
+}
+
+// ── Listado de Mujeres en Edad Fértil (18–49 años, sexo F, con fecha de nacimiento) ──
+function abrirModalMEFDetalle(){
+  const lista=[];
+  getCatalogo().forEach(v=>{
+    if(v.deshabitada) return;
+    _perActivas(v).forEach(p=>{
+      if(p.sexo!=='F') return;
+      const m=mesesPersona(p);
+      if(m===null||m<216||m>=600) return;
+      lista.push({nombre:p.nombre||'—',fnac:p.fnac,sexo:'F',viv:v.vivienda,meses:m});
+    });
+  });
+  // Orden: por vivienda (numérico) y luego por nombre
+  lista.sort((a,b)=>{
+    const na=parseFloat(a.viv)||0, nb=parseFloat(b.viv)||0;
+    return na!==nb?na-nb:(String(a.viv).localeCompare(String(b.viv))||a.nombre.localeCompare(b.nombre));
+  });
+  document.getElementById('mef-detalle-sub').textContent=
+    lista.length+' mujer'+(lista.length!==1?'es':'')+' de 18 a 49 años, ordenadas por vivienda.';
+  _listadoActual={titulo:'Mujeres en edad fértil de 18 a 49 años',lista:lista};
+  const elMef=document.getElementById('mef-detalle-lista');
+  if(lista.length) _listaLazy(elMef,lista,(p,i)=>_itemPersonaHtml(p,i,false));
+  else elMef.innerHTML='<p class="mat-item-empty">Sin mujeres en edad fértil registradas.</p>';
+  abrirModal('modal-mef-detalle');
+}
+
+// ── Grupos etarios (edades calculadas con fecha de nacimiento; m = meses cumplidos) ──
+const GRUPOS_ETARIOS=[
+  {key:'ninos04',   ico:'🍼', label:'Niños de 0 a 4 años',                     mixto:true,  test:(p,m)=>m<60},
+  {key:'ninos511',  ico:'🧒', label:'Niños de 5 a 11 años',                    mixto:true,  test:(p,m)=>m>=60&&m<144},
+  {key:'adolm',     ico:'👦', label:'Adolescentes masculinos de 12 a 19 años', mixto:false, test:(p,m)=>p.sexo==='M'&&m>=144&&m<240},
+  {key:'adolf',     ico:'👧', label:'Adolescentes femeninos de 12 a 17 años',  mixto:false, test:(p,m)=>p.sexo==='F'&&m>=144&&m<216},
+  {key:'mef',       ico:'🌸', label:'Mujeres en edad fértil de 18 a 49 años',  mixto:false, test:(p,m)=>p.sexo==='F'&&m>=216&&m<600},
+  {key:'adultom',   ico:'👨', label:'Adultos masculinos de 20 a 59 años',      mixto:false, test:(p,m)=>p.sexo==='M'&&m>=240&&m<720},
+  {key:'mujer5059', ico:'👩', label:'Mujeres de 50 a 59 años',                 mixto:false, test:(p,m)=>p.sexo==='F'&&m>=600&&m<720},
+  {key:'adultomay', ico:'👴', label:'Adultos mayores de 60 años a más',        mixto:true,  test:(p,m)=>m>=720},
+];
+function _personasDeGrupo(g){
+  const lista=[];
+  getCatalogo().forEach(v=>{
+    if(v.deshabitada) return;
+    _perActivas(v).forEach(p=>{
+      const m=mesesPersona(p);
+      if(m===null||!g.test(p,m)) return;
+      lista.push({nombre:p.nombre||'—',fnac:p.fnac,sexo:p.sexo||'',viv:v.vivienda,meses:m});
+    });
+  });
+  lista.sort((a,b)=>{
+    const na=parseFloat(a.viv)||0, nb=parseFloat(b.viv)||0;
+    return na!==nb?na-nb:(String(a.viv).localeCompare(String(b.viv))||a.nombre.localeCompare(b.nombre));
+  });
+  return lista;
+}
+function abrirModalGruposEtarios(){
+  document.getElementById('gru-menu-lista').innerHTML=GRUPOS_ETARIOS.map(g=>{
+    const n=_personasDeGrupo(g).length;
+    return `<button type="button" class="gru-opt" onclick="abrirGrupoEtario('${g.key}')">
+      <span class="gru-opt-ico">${g.ico}</span>
+      <span class="gru-opt-txt">${g.label}</span>
+      <span class="gru-opt-n">${n}</span>
+    </button>`;
+  }).join('');
+  abrirModal('modal-grupos-menu');
+}
+function abrirGrupoEtario(key){
+  const g=GRUPOS_ETARIOS.find(x=>x.key===key); if(!g) return;
+  const lista=_personasDeGrupo(g);
+  document.getElementById('grupo-detalle-titulo').textContent=g.ico+' '+g.label;
+  document.getElementById('grupo-detalle-sub').textContent=
+    lista.length+' persona'+(lista.length!==1?'s':'')+', ordenadas por vivienda.';
+  _listadoActual={titulo:g.label,lista:lista};
+  const elGru=document.getElementById('grupo-detalle-lista');
+  if(lista.length) _listaLazy(elGru,lista,(p,i)=>_itemPersonaHtml(p,i,g.mixto));
+  else elGru.innerHTML='<p class="mat-item-empty">Sin personas en este grupo.</p>';
+  abrirModal('modal-grupo-detalle');
+}
+
+// ── Imprimir (PDF con la impresora del sistema) y copiar a Excel los listados de personas ──
+let _listadoActual={titulo:'',lista:[]};
+function _sexoTxt(x){ return x==='F'?'Femenino':(x==='M'?'Masculino':''); }
+function _filasListado(){
+  return _listadoActual.lista.map((p,i)=>[
+    i+1,
+    p.nombre||'',
+    _fmtFechaISO(p.fnac)==='—'?'':_fmtFechaISO(p.fnac),
+    calcularEdadTexto(p.fnac)||(Math.floor((p.meses||0)/12)+' años'),
+    _sexoTxt(p.sexo),
+    p.viv
+  ]);
+}
+function imprimirListadoPersonas(){
+  const L=_listadoActual;
+  if(!L.lista.length){ toast('No hay personas para imprimir','error'); return; }
+  const th='style="background:#0a5c3c;color:#fff;padding:5px 7px;font-size:11px;border:1px solid #0a5c3c;text-align:left"';
+  const td='style="padding:4px 7px;font-size:11px;border:1px solid #bcd"';
+  const filas=_filasListado().map((f,i)=>`<tr${i%2?' style="background:#eef8f2"':''}>
+    <td ${td.slice(0,-1)};text-align:center">${f[0]}</td>
+    <td ${td}>${_mlvEsc(f[1])}</td>
+    <td ${td}>${_mlvEsc(f[2])}</td>
+    <td ${td}>${_mlvEsc(f[3])}</td>
+    <td ${td}>${_mlvEsc(f[4])}</td>
+    <td ${td.slice(0,-1)};text-align:center">${_mlvEsc(f[5])}</td></tr>`).join('');
+  const hoy=new Date().toLocaleDateString('es-SV',{day:'2-digit',month:'2-digit',year:'numeric'});
+  document.getElementById('print-root').innerHTML=`<div style="font-family:Arial,Helvetica,sans-serif;color:#0c1f18">
+    <h2 style="color:#0a5c3c;margin:0 0 4px;font-size:16px">${_mlvEsc(L.titulo)}</h2>
+    <p style="margin:0 0 10px;font-size:11px;color:#555">Total: ${L.lista.length} persona${L.lista.length!==1?'s':''} · Ordenadas por vivienda · Impreso: ${hoy}</p>
+    <table style="border-collapse:collapse;width:100%">
+      <thead style="display:table-header-group"><tr>
+        <th ${th} width="34">N°</th><th ${th}>Nombre</th><th ${th} width="78">Fecha nac.</th>
+        <th ${th} width="95">Edad</th><th ${th} width="68">Sexo</th><th ${th} width="46">Viv.</th>
+      </tr></thead><tbody>${filas}</tbody></table></div>`;
+  document.body.classList.add('imprimiendo');
+  const limpiar=()=>{ document.body.classList.remove('imprimiendo'); document.getElementById('print-root').innerHTML=''; window.removeEventListener('afterprint',limpiar); };
+  window.addEventListener('afterprint',limpiar);
+  setTimeout(()=>{ try{ window.print(); }catch(e){ limpiar(); toast('No se pudo abrir la impresión','error'); } },150);
+}
+function copiarListadoExcel(){
+  const L=_listadoActual;
+  if(!L.lista.length){ toast('No hay personas para copiar','error'); return; }
+  const filas=_filasListado().map(f=>f.slice(0,5));            // N°, Nombre, Fecha nac., Edad, Sexo
+  const enc=['N°','Nombre','Fecha de nacimiento','Edad','Sexo'];
+  const limpio=t=>String(t).replace(/[\t\r\n]+/g,' ');
+  const tsv=[enc].concat(filas).map(r=>r.map(limpio).join('\t')).join('\r\n');
+  const html='<table><tr>'+enc.map(h=>'<th>'+_mlvEsc(h)+'</th>').join('')+'</tr>'
+    +filas.map(r=>'<tr>'+r.map(c=>'<td>'+_mlvEsc(c)+'</td>').join('')+'</tr>').join('')+'</table>';
+  const ok=()=>toast('✅ '+filas.length+' filas copiadas. Pega en Excel (Ctrl+V)');
+  const respaldo=()=>{
+    const ta=document.createElement('textarea');
+    ta.value=tsv; ta.style.cssText='position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    let r=false; try{ r=document.execCommand('copy'); }catch(e){}
+    ta.remove();
+    r?ok():toast('No se pudo copiar al portapapeles','error');
+  };
+  if(navigator.clipboard && window.ClipboardItem){
+    navigator.clipboard.write([new ClipboardItem({
+      'text/plain':new Blob([tsv],{type:'text/plain'}),
+      'text/html':new Blob([html],{type:'text/html'})
+    })]).then(ok).catch(respaldo);
+  } else if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(tsv).then(ok).catch(respaldo);
+  } else respaldo();
+}
+
 function abrirModalMaternoDetalle(){
   const emb=getEmbarazadasLS(), puer=getPuerperasLS();
   const embHtml = emb.length ? emb.map(p=>{
@@ -3648,6 +4022,7 @@ function _popupMaterna(p, tipo){
     <div style="min-width:185px;max-width:210px;font-family:sans-serif;padding:2px;">
         ${tipoBadge}${riesgoPill}<br>
         <strong style="font-size:0.97em;color:#1a1a1a;">${p.nombre || '—'}</strong>
+        <div style="font-size:0.82em;color:#444;margin:4px 0 0;">🎂 Edad: ${_edadMaterna(p) === '—' ? 'no registrada' : _edadMaterna(p)}</div>
         <div style="font-size:0.82em;color:#444;margin:4px 0;">${estadoInfo}</div>
         ${fechasClaveInfo}
         ${riesgoTag}
@@ -3745,13 +4120,14 @@ function _mfamRender() {
     const edad = fnacISO ? calcularEdadTexto(fnacISO) : (p.edad || '');
     const subtxt = fnacISO ? (() => { const [y,m,d] = fnacISO.split('-'); return `Nac. ${d}/${m}/${y}`; })() : '';
     const esResaltada = _mfamResaltarPerId === p.id;
-    return `<div class="mfam-persona-row${esResaltada ? ' resaltada' : ''}" id="mfam-row-${p.id}">
-      <span class="mfam-per-ico">👤</span>
+    return `<div class="mfam-persona-row${esResaltada ? ' resaltada' : ''}" id="mfam-row-${p.id}" style="${p.inactivo?'opacity:.6;background:#f3f4f6;':''}">
+      <span class="mfam-per-ico">${p.inactivo?'⏸':'👤'}</span>
       <div class="mfam-per-info">
-        <strong>${p.nombre}</strong>
+        <strong>${p.nombre}${p.inactivo?' <span style="font-size:.66rem;background:#9ca3af;color:#fff;border-radius:6px;padding:1px 6px">INACTIVO</span>':''}</strong>
         <span>${edad ? '🎂 ' + edad : 'Sin edad'}${subtxt ? ' · ' + subtxt : ''}</span>
       </div>
       <div class="mfam-per-btns">
+        <button class="mfam-btn-edit" onclick="togglePersonaInactiva('${viv.id}','${p.id}')" title="${p.inactivo?'Activar de nuevo':'Marcar inactivo (se fue de la comunidad)'}" style="font-size:.95rem">${p.inactivo?'▶️':'⏸'}</button>
         <button class="mfam-btn-edit" onclick="_mfamEditarPersona('${viv.id}','${p.id}')" title="Editar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         </button>
@@ -3907,7 +4283,7 @@ function _mlvRenderRows(lista){
     return;
   }
   cont.innerHTML=lista.map(v=>{
-    const per=v.personas||[];
+    const per=_perActivas(v);
     const primer=per.length?per[0].nombre:null;
     const total=per.length;
     const tieneGps=!!(v.lat&&v.lng);
@@ -3973,7 +4349,7 @@ function _mlvVerEnMapa(vivId){
 function imprimirListaViv(){
   const base=_mlvSorted.length?_mlvSorted:_mlvOrdenar(getCatalogo());
   const filas=base.map(v=>{
-    const per=v.personas||[];
+    const per=_perActivas(v);
     const primer=per.length?_mlvEsc(per[0].nombre):'—';
     return `<tr>
       <td style="text-align:center;font-weight:700;padding:.4rem .7rem;border:1px solid #cde">${_mlvEsc(v.vivienda)}</td>
@@ -4044,48 +4420,31 @@ async function _initFB(){
 }
 
 // ── UID del promotor ──
-function getUID(){ return localStorage.getItem(LS_UID)||''; }
-
-function abrirModalUID(){
-  document.getElementById('uid-input').value=getUID();
-  document.getElementById('modal-uid').classList.add('show');
-  setTimeout(()=>document.getElementById('uid-input').focus(),80);
+// Perfil ÚNICO (se edita solo en index.html): código de sincronización, cantón, promotor y unidad.
+function irAPerfilUnico(){ (window.pfxAbrirPerfil ? pfxAbrirPerfil() : (location.href='index.html#perfil')); }
+const LS_PERFIL_UNICO = 'sis_perfil_unico_v1';
+function getPerfilUnico(){
+  try{ const u=JSON.parse(localStorage.getItem(LS_PERFIL_UNICO)||'null'); if(u&&typeof u==='object') return u; }catch(e){}
+  return {};
+}
+// La clave de la nube sale del nombre del perfil único (mismo criterio que Control MEF y Visita Domiciliar):
+// sin mayúsculas/minúsculas, sin tildes y sin símbolos.
+function getUID(){
+  const n=String(getPerfilUnico().nombre||'');
+  return n.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,40);
 }
 
-function guardarUID(){
-  const val=document.getElementById('uid-input').value.trim().toUpperCase();
-  if(!val){toast('Ingresa un código de promotor','error');return;}
-  localStorage.setItem(LS_UID,val);
-  cerrarModal('modal-uid');
-  _actualizarSyncUI();
-  toast('✅ Código guardado: '+val,'success');
-}
+function abrirModalUID(){ irAPerfilUnico(); }
 
 // ── DATOS DE ENCABEZADO (cantón, promotor, unidad de salud) ──
 const LS_HEADER = 'mapa_san_encabezado';
 function getHeaderInfo(){
-  try{ return JSON.parse(localStorage.getItem(LS_HEADER)||'{}'); }
+  const u=getPerfilUnico();
+  if(u.nombre||u.comunidad||u.ucsf) return {canton:u.comunidad||'', promotor:u.nombre||'', unidad:u.ucsf||''};
+  try{ return JSON.parse(localStorage.getItem(LS_HEADER)||'{}'); }   // respaldo: datos antiguos
   catch(e){ return {}; }
 }
-function abrirModalEncabezado(){
-  const h=getHeaderInfo();
-  document.getElementById('enc-canton').value=h.canton||'';
-  document.getElementById('enc-promotor').value=h.promotor||'';
-  document.getElementById('enc-unidad').value=h.unidad||'';
-  document.getElementById('modal-encabezado').classList.add('show');
-  setTimeout(()=>document.getElementById('enc-canton').focus(),80);
-}
-function guardarEncabezado(){
-  const h={
-    canton: document.getElementById('enc-canton').value.trim(),
-    promotor: document.getElementById('enc-promotor').value.trim(),
-    unidad: document.getElementById('enc-unidad').value.trim(),
-  };
-  localStorage.setItem(LS_HEADER, JSON.stringify(h));
-  cerrarModal('modal-encabezado');
-  aplicarEncabezado();
-  toast('✅ Datos guardados','success');
-}
+function abrirModalEncabezado(){ irAPerfilUnico(); }
 function aplicarEncabezado(){
   const h=getHeaderInfo();
   const homeSub=document.getElementById('home-sub');
@@ -4116,7 +4475,7 @@ function _actualizarSyncUI(){
   const mbtnSub=document.getElementById('mbtn-sync-sub');
   if(uid){
     txt.textContent=syncAt?'Último sync: '+syncAt:'Promotor: '+uid+' · Sin sincronizar';
-    cfgBtn.textContent='✏️ '+uid;
+    cfgBtn.textContent='✏️ Perfil'; cfgBtn.title='Perfil: '+uid;   // el nombre completo es largo y empujaba Subir/Bajar fuera de la pantalla
     if(upBtn) upBtn.style.display='';
     if(dnBtn) dnBtn.style.display='';
     if(syncBtn) syncBtn.style.display='';
@@ -4410,6 +4769,7 @@ async function bajarNube(){
             var isHidden = zones[0].style.display === 'none';
             applyState(!isHidden);
             localStorage.setItem(CLOUD_HIDE_KEY, isHidden ? '0' : '1');
+            try { window.sisnavFijarVisible && sisnavFijarVisible(isHidden); } catch (e) {}
         }
     };
     document.addEventListener('DOMContentLoaded', function(){
@@ -4471,12 +4831,9 @@ async function bajarNube(){
 <div class="sisnav-menu" id="sisnavMenu">
   <div class="sisnav-titulo">Aplicaciones</div>
   <a class="sisnav-item" href="index.html"><span class="sisnav-ic">🏠</span>Inicio</a>
-  <a class="sisnav-item" href="Vigilancia_Materna.html"><span class="sisnav-ic">👩‍⚕️</span>Vigilancia Materna</a>
+  <a class="sisnav-item" href="index.html"><span class="sisnav-ic">👩‍⚕️</span>Vigilancia Materna</a>
   <a class="sisnav-item" href="calculadora_materna.html"><span class="sisnav-ic">🗓️</span>Calculadora Materna</a>
-  <a class="sisnav-item" href="mef.html"><span class="sisnav-ic">📋</span>Control MEF</a>
-  <a class="sisnav-item" href="visita_domiciliar.html"><span class="sisnav-ic">🩺</span>Hoja de Visita Domiciliar</a>
-  <a class="sisnav-item" href="RegistroDiario_Promotor.html"><span class="sisnav-ic">📝</span>Registro Diario</a>
-  <a class="sisnav-item" href="CurvasdeCrecimiento.html"><span class="sisnav-ic">📈</span>Curvas de Crecimiento</a>
+  
 </div>
 <script type="text/x-deferred">
 (function(){
@@ -4593,5 +4950,262 @@ async function bajarNube(){
 })();
 </script>
 
+<!-- PERFIL_RESPALDO_INICIO: perfil único de respaldo (misma llave que el index: sis_perfil_unico_v1) -->
+<style>
+#pfxModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:100000;align-items:center;justify-content:center;padding:20px;font-family:inherit}
+#pfxModal.active{display:flex}
+#pfxModal .pfx-box{background:#fff;border-radius:20px;padding:24px 22px 20px;max-width:340px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.28);color:#1a2e3a;box-sizing:border-box}
+#pfxModal .pfx-ico{font-size:2.2rem;text-align:center;margin-bottom:6px}
+#pfxModal .pfx-tit{font-size:1.05rem;font-weight:800;text-align:center;margin-bottom:6px}
+#pfxModal .pfx-desc{font-size:.82rem;color:#546e7a;text-align:center;margin:0 0 14px;line-height:1.4}
+#pfxModal .pfx-f{text-align:left;margin-bottom:10px}
+#pfxModal .pfx-f label{display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#546e7a;margin-bottom:4px}
+#pfxModal .pfx-f input{width:100%;box-sizing:border-box;padding:12px;border:2px solid #e0e0e0;border-radius:10px;font-size:.88rem;color:#1a2e3a;background:#fff;outline:none;font-family:inherit}
+#pfxModal .pfx-f input:focus{border-color:#17a2b8}
+#pfxModal .pfx-sig{position:relative;border:2px dashed #cfd8dc;border-radius:10px;background:#fafcfd;height:96px;cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#pfxModal .pfx-sig.firmada{border-style:solid;border-color:#17a2b8}
+#pfxModal .pfx-sig img{max-width:100%;max-height:100%;display:none;object-fit:contain}
+#pfxModal .pfx-sig.firmada img{display:block}
+#pfxModal .pfx-sig-ph{font-size:.8rem;color:#78909c;font-weight:600;text-align:center;padding:0 8px}
+#pfxModal .pfx-sig.firmada .pfx-sig-ph{display:none}
+#pfxModal .pfx-sig-b{display:flex;justify-content:flex-end;margin-top:4px}
+#pfxModal .pfx-sig-b button{border:none;background:none;color:#c62828;font-size:.75rem;font-weight:600;cursor:pointer;padding:4px 6px}
+#pfxModal .pfx-nota{font-size:.72rem;color:#546e7a;line-height:1.4;margin:2px 0 14px}
+#pfxModal .pfx-btns{display:flex;gap:10px}
+#pfxModal .pfx-btns button{padding:12px;border-radius:12px;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit}
+#pfxModal .pfx-cancel{flex:1;border:2px solid #e0e0e0;background:#fff;color:#546e7a}
+#pfxModal .pfx-ok{flex:2;border:none;background:linear-gradient(135deg,#0d6e8a,#2bb5d8);color:#fff;box-shadow:0 4px 12px rgba(13,110,138,.35)}
+@media (orientation:landscape){
+ #pfxModal{padding:8px}
+ #pfxModal .pfx-box{max-width:760px;max-height:96vh;padding:14px 20px}
+ #pfxModal .pfx-ico{display:none}
+ #pfxModal .pfx-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+ #pfxModal .pfx-firma{grid-column:1/-1}
+}
+#pfxSigFull{position:fixed;inset:0;z-index:100001;background:#fff;display:none;flex-direction:column;font-family:inherit}
+#pfxSigFull.active{display:flex}
+#pfxSigFull .pfx-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:linear-gradient(135deg,#0d6e8a,#2bb5d8);color:#fff}
+#pfxSigFull .pfx-h b{font-size:.95rem}
+#pfxSigFull .pfx-h span{font-size:.72rem;opacity:.9}
+#pfxSigFull .pfx-b{flex:1;min-height:0;padding:10px;background:#eceff1}
+#pfxSigFull .pfx-pad{position:relative;width:100%;height:100%;background:#fff;border:2px solid #17a2b8;border-radius:12px;touch-action:none;overflow:hidden}
+#pfxSigFull canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#pfxSigFull .pfx-ln{position:absolute;left:6%;right:6%;bottom:22%;border-bottom:1.5px dashed #cfd8dc;pointer-events:none}
+#pfxSigFull .pfx-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#b0bec5;font-size:1rem;pointer-events:none}
+#pfxSigFull .pfx-ft{display:flex;gap:10px;padding:10px 14px;background:#fff;border-top:1px solid #e0e0e0}
+#pfxSigFull .pfx-ft button{flex:1;padding:12px;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;border:2px solid #e0e0e0;background:#fff;color:#546e7a;font-family:inherit}
+#pfxSigFull .pfx-ft button.ok{flex:2;border:none;color:#fff;background:linear-gradient(135deg,#2e7d32,#66bb6a)}
+#pfxSigFull .pfx-ft button.ok:disabled{opacity:.45}
+#pfxSigFull .pfx-ft button.bor{color:#c62828}
+</style>
+
+<div id="pfxModal" onclick="if(event.target===this)pfxCerrarPerfil()">
+  <div class="pfx-box">
+    <div class="pfx-ico">👤</div>
+    <div class="pfx-tit">Mi perfil</div>
+    <p class="pfx-desc">Es el mismo perfil de todas las apps. Se guarda en este dispositivo y funciona sin internet.</p>
+    <div class="pfx-grid">
+      <div class="pfx-f"><label>Nombre completo *</label><input type="text" id="pfx-nombre" placeholder="Ej: María González" maxlength="80"></div>
+      <div class="pfx-f"><label>Cargo / Especialidad</label><input type="text" id="pfx-cargo" placeholder="Ej: Promotor de Salud, Enfermera…" maxlength="60"></div>
+      <div class="pfx-f"><label>Establecimiento / UCSF / UDS</label><input type="text" id="pfx-ucsf" placeholder="Ej: UCSF Coatepeque" maxlength="60"></div>
+      <div class="pfx-f"><label>Comunidad / Cantón</label><input type="text" id="pfx-comunidad" placeholder="Ej: Cantón El Carmen" maxlength="60"></div>
+      <div class="pfx-f"><label>Municipio / Distrito</label><input type="text" id="pfx-municipio" placeholder="Ej: Coatepeque" maxlength="60"></div>
+      <div class="pfx-f pfx-firma">
+        <label>Tu firma digital</label>
+        <div class="pfx-sig" id="pfxSigWrap" onclick="pfxSigAbrir()">
+          <img id="pfxSigImg" alt="Tu firma">
+          <div class="pfx-sig-ph">✍️ Toca para firmar en pantalla grande</div>
+        </div>
+        <div class="pfx-sig-b"><button type="button" onclick="pfxSigQuitar()">✕ Borrar firma</button></div>
+      </div>
+    </div>
+    <p class="pfx-nota">💾 Si usas el menú principal (index), el perfil que guardes aquí es el mismo que verás allá cuando compartan almacenamiento.</p>
+    <div class="pfx-btns">
+      <button type="button" class="pfx-cancel" onclick="pfxCerrarPerfil()">Cancelar</button>
+      <button type="button" class="pfx-ok" onclick="pfxGuardarPerfil()">✓ Guardar perfil</button>
+    </div>
+  </div>
+</div>
+
+<div id="pfxSigFull">
+  <div class="pfx-h"><b>✍️ Firma del personal</b><span>Firma con el dedo dentro del recuadro</span></div>
+  <div class="pfx-b"><div class="pfx-pad"><canvas id="pfxCanvas"></canvas><div class="pfx-ln"></div><div class="pfx-ph" id="pfxPh">Firma aquí</div></div></div>
+  <div class="pfx-ft">
+    <button type="button" onclick="pfxSigCerrar()">Cancelar</button>
+    <button type="button" class="bor" onclick="pfxSigLimpiar()">🗑 Limpiar</button>
+    <button type="button" class="ok" id="pfxOk" onclick="pfxSigAceptar()" disabled>✓ Aceptar</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  if (window.pfxAbrirPerfil) return;
+  var KEY = 'sis_perfil_unico_v1', SIG = 'sig_personal_v1';
+  var $ = function (id) { return document.getElementById(id); };
+  var firma;            // undefined = sin cambios · null = borrada · 'data:...' = nueva
+  var trazo = false, tinta = false;
+
+  function ss(op, k, v) { try { return op === 'g' ? sessionStorage.getItem(k) : sessionStorage.setItem(k, v); } catch (e) { return null; } }
+  function leer() {
+    try { var p = JSON.parse(localStorage.getItem(KEY) || 'null'); if (p && typeof p === 'object') return p; } catch (e) {}
+    return null;
+  }
+  function tieneNombre() { var p = leer(); return !!(p && String(p.nombre || '').trim()); }
+
+  // Si ya había perfiles viejos de cada app, se unen (sin borrarlos), igual que en el index
+  function migrar() {
+    if (tieneNombre()) return false;
+    var rd = function (k) { try { return JSON.parse(localStorage.getItem(k) || 'null') || {}; } catch (e) { return {}; } };
+    var v = rd('minsal_perfil_v1'), m = rd('minsal_pf_perfil_v1'), r = rd('rdps_perfil');
+    var pick = function () { for (var i = 0; i < arguments.length; i++) { var s = String(arguments[i] || '').trim(); if (s) return s; } return ''; };
+    var p = { nombre: pick(v.nombre, m.nombre, r.nombre), cargo: pick(v.cargo, m.cargo),
+              ucsf: pick(v.ucsf, m.ucsf, r.establecimiento), comunidad: pick(r.comunidad), municipio: pick(r.municipio) };
+    if (!p.nombre) return false;
+    localStorage.setItem(KEY, JSON.stringify(p));
+    return true;
+  }
+
+  function sigMostrar(url) {
+    var w = $('pfxSigWrap'), im = $('pfxSigImg');
+    if (url) { im.src = url; w.classList.add('firmada'); } else { im.removeAttribute('src'); w.classList.remove('firmada'); }
+  }
+  window.pfxSigQuitar = function () { firma = null; sigMostrar(null); };
+
+  window.pfxAbrirPerfil = function () {
+    var p = leer() || {};
+    ['nombre', 'cargo', 'ucsf', 'comunidad', 'municipio'].forEach(function (k) { $('pfx-' + k).value = p[k] || ''; });
+    firma = undefined;
+    sigMostrar(localStorage.getItem(SIG) || null);
+    $('pfxModal').classList.add('active');
+  };
+  window.pfxCerrarPerfil = function () { $('pfxModal').classList.remove('active'); ss('s', 'pfx_omitido', '1'); };
+
+  window.pfxGuardarPerfil = function () {
+    var g = function (k) { return $('pfx-' + k).value.trim(); };
+    if (!g('nombre')) { alert('Ingresa tu nombre completo para continuar.'); return; }
+    var p = { nombre: g('nombre'), cargo: g('cargo'), ucsf: g('ucsf'), comunidad: g('comunidad'), municipio: g('municipio') };
+    localStorage.setItem(KEY, JSON.stringify(p));
+    if (typeof firma === 'string') localStorage.setItem(SIG, firma);
+    else if (firma === null) localStorage.removeItem(SIG);
+    var listo = (window.__lsShim && window.__lsShim.flush) ? window.__lsShim.flush() : Promise.resolve();
+    // Se recarga para que la app tome el perfil nuevo en todas sus pantallas
+    Promise.resolve(listo).then(function () { location.reload(); });
+  };
+
+  /* ---------- Pad de firma a pantalla completa ---------- */
+  function cv() { return $('pfxCanvas'); }
+  function ajustar() {
+    var c = cv(), w = c.parentNode, d = window.devicePixelRatio || 1;
+    var nw = Math.max(Math.round(w.clientWidth * d), 1), nh = Math.max(Math.round(w.clientHeight * d), 1);
+    if (c.width === nw && c.height === nh) return;
+    var snap = null, ow = c.width, oh = c.height;
+    if (tinta && c.width > 1) { snap = new Image(); snap.src = c.toDataURL('image/png'); }
+    c.width = nw; c.height = nh;
+    var x = c.getContext('2d');
+    x.lineWidth = Math.max(2.6 * d, 2.6); x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = '#1a2e3a';
+    if (snap) {
+      var dib = function () { var k = Math.min(nw / ow, nh / oh); x.drawImage(snap, (nw - ow * k) / 2, (nh - oh * k) / 2, ow * k, oh * k); };
+      if (snap.complete) dib(); else snap.onload = dib;
+    }
+  }
+  function pos(e) { var c = cv(), b = c.getBoundingClientRect(); return { x: (e.clientX - b.left) * c.width / b.width, y: (e.clientY - b.top) * c.height / b.height }; }
+  function iniciarPad() {
+    var c = cv();
+    c.addEventListener('pointerdown', function (e) {
+      e.preventDefault(); trazo = true;
+      try { c.setPointerCapture(e.pointerId); } catch (_) {}
+      var x = c.getContext('2d'), p = pos(e);
+      x.beginPath(); x.moveTo(p.x, p.y); x.lineTo(p.x + .1, p.y + .1); x.stroke();
+      tinta = true; $('pfxPh').style.display = 'none'; $('pfxOk').disabled = false;
+    });
+    c.addEventListener('pointermove', function (e) { if (!trazo) return; e.preventDefault(); var x = c.getContext('2d'), p = pos(e); x.lineTo(p.x, p.y); x.stroke(); });
+    ['pointerup', 'pointercancel'].forEach(function (t) { c.addEventListener(t, function () { trazo = false; }); });
+    var re = function (ms) { return function () { setTimeout(function () { if ($('pfxSigFull').classList.contains('active')) ajustar(); }, ms); }; };
+    window.addEventListener('resize', re(120));
+    window.addEventListener('orientationchange', re(300));
+  }
+  window.pfxSigAbrir = function () {
+    $('pfxSigFull').classList.add('active');
+    tinta = false; trazo = false; $('pfxPh').style.display = ''; $('pfxOk').disabled = true;
+    var c = cv(); c.width = 1; c.height = 1; setTimeout(ajustar, 50);
+  };
+  window.pfxSigCerrar = function () { $('pfxSigFull').classList.remove('active'); };
+  window.pfxSigLimpiar = function () {
+    var c = cv(), x = c.getContext('2d'); x.save(); x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, c.width, c.height); x.restore();
+    tinta = false; $('pfxPh').style.display = ''; $('pfxOk').disabled = true;
+  };
+  function recortada() {
+    var c = cv(), x = c.getContext('2d'), d = x.getImageData(0, 0, c.width, c.height).data;
+    var x0 = c.width, y0 = c.height, x1 = -1, y1 = -1;
+    for (var yy = 0; yy < c.height; yy++) for (var xx = 0; xx < c.width; xx++) {
+      if (d[(yy * c.width + xx) * 4 + 3] > 10) { if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy; }
+    }
+    if (x1 < 0) return null;
+    var m = 12; x0 = Math.max(x0 - m, 0); y0 = Math.max(y0 - m, 0); x1 = Math.min(x1 + m, c.width - 1); y1 = Math.min(y1 + m, c.height - 1);
+    var w = x1 - x0 + 1, h = y1 - y0 + 1, k = Math.min(1, 700 / w);
+    var o = document.createElement('canvas'); o.width = Math.round(w * k); o.height = Math.round(h * k);
+    o.getContext('2d').drawImage(c, x0, y0, w, h, 0, 0, o.width, o.height);
+    return o.toDataURL('image/png');
+  }
+  window.pfxSigAceptar = function () { var u = recortada(); if (!u) return; firma = u; sigMostrar(u); pfxSigCerrar(); };
+  iniciarPad();
+
+  /* ---------- Arranque: si no hay perfil, se abre el formulario ---------- */
+  function auto() {
+    if (tieneNombre()) return;
+    if (migrar()) {
+      // Había perfiles viejos: se unieron; se recarga una sola vez para que la app los tome
+      if (!ss('g', 'pfx_recargado')) {
+        ss('s', 'pfx_recargado', '1');
+        var f = (window.__lsShim && window.__lsShim.flush) ? window.__lsShim.flush() : Promise.resolve();
+        Promise.resolve(f).then(function () { location.reload(); });
+      }
+      return;
+    }
+    if (ss('g', 'pfx_omitido')) return;   // ya lo cerraste en esta sesión: no insiste
+    window.pfxAbrirPerfil();
+  }
+  var listo = (window.__lsShim && window.__lsShim.ready) ? window.__lsShim.ready : Promise.resolve();
+  Promise.resolve(listo).then(function () { setTimeout(auto, 900); });
+})();
+</script>
+<!-- PERFIL_RESPALDO_FIN -->
+
+<!-- SISNAV_OCULTO_INICIO: el botón flotante de menú viene oculto; los 5 toques secretos de cada app lo muestran/ocultan -->
+<style>html:not(.sisnav-on) #sisnavBtn,html:not(.sisnav-on) #sisnavMenu,html:not(.sisnav-on) #sisnavBackdrop{display:none!important}</style>
+<script>
+(function () {
+  var KEY = 'sisnav_visible_v1';
+  function aplicar(v) { document.documentElement.classList.toggle('sisnav-on', !!v); }
+  function aviso(txt) {
+    var d = document.createElement('div');
+    d.textContent = txt;
+    d.style.cssText = 'position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:rgba(22,26,34,.92);color:#fff;padding:10px 16px;border-radius:12px;font:600 .85rem sans-serif;z-index:100010;box-shadow:0 4px 16px rgba(0,0,0,.3)';
+    document.body.appendChild(d); setTimeout(function () { d.remove(); }, 1800);
+  }
+  window.sisnavFijarVisible = function (v) {
+    if (v === undefined) v = !document.documentElement.classList.contains('sisnav-on');
+    aplicar(v);
+    try { localStorage.setItem(KEY, v ? '1' : '0'); } catch (e) {}
+    if (!v && window.sisnavCerrar) { try { sisnavCerrar(); } catch (e) {} }
+    return v;
+  };
+  // Gesto de 5 toques para las apps que no tenían uno (Vigilancia Materna y Calculadora Materna)
+  var n = 0, t = null;
+  window.sisnavToque5 = function () {
+    n++; clearTimeout(t); t = setTimeout(function () { n = 0; }, 1500);
+    if (n >= 5) {
+      n = 0; clearTimeout(t);
+      aviso(sisnavFijarVisible() ? '🔓 Botón de menú activado' : '🔒 Botón de menú oculto');
+    }
+  };
+  var listo = (window.__lsShim && window.__lsShim.ready) ? window.__lsShim.ready : Promise.resolve();
+  Promise.resolve(listo).then(function () {
+    var v = null; try { v = localStorage.getItem(KEY); } catch (e) {}
+    aplicar(v === '1');   // por defecto (primera vez) queda oculto
+  });
+})();
+</script>
+<!-- SISNAV_OCULTO_FIN -->
 </body>
 </html>
